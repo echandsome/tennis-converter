@@ -80,17 +80,22 @@ while current_date <= end_date:
             driver.switch_to.window(driver.window_handles[0])  # Switch back to main tab
 
 
-        
+        groupings = soup.select(".Grouping")
 
-        grouping_elements = soup.select(".Grouping_Name")
-        grouping_names = [group.text.strip() for group in grouping_elements]
+        for grouping in groupings:
+            grouping_name_el = grouping.select_one(".Grouping_Name")
+            if not grouping_name_el:
+                continue
 
-        # Find all match lists inside the card
-        match_lists = soup.find_all('ul', {'class': 'VZTD rEPuv dAmzA'})
+            grouping_name = grouping_name_el.text.strip()
+            gender = "Man" if "Men" in grouping_name else "Woman"
 
-        tournament_data = []
+            match_lists = grouping.select('ul.VZTD.rEPuv.dAmzA')
+            if not match_lists:
+                continue
 
-        for grouping_idx, (grouping_name, match_list) in enumerate(zip(grouping_names, match_lists)):
+            tournament_data = []
+
             print(f"Processing matches for Group: {grouping_name}")
             if "Singles" not in grouping_name:
                 continue  # Skip if it's not a singles event
@@ -192,9 +197,9 @@ while current_date <= end_date:
 
                 # Add a blank row after each match (for both players)
                 tournament_data.append([])
-
-        # Append the tournament data to the main list
-        data.extend(tournament_data)
+            
+            # Append the tournament data to the main list
+            data.extend(tournament_data)
 
     # Move to the next date
     current_date += timedelta(days=1)
