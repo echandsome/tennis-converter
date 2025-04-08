@@ -2,69 +2,101 @@ import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
 import os
+from datetime import datetime
+import platform
+import pandas as pd
 
-# Month name mapping
-MONTH_MAP = {
-    '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
-    '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
-    '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'
-}
+from datetime import datetime
+import pandas as pd
+import platform
 
-def format_date(date_str):
-    if pd.isna(date_str):
-        return ['', '', '']
-    try:
-        date = pd.to_datetime(date_str)
-        year = str(date.year)
-        month = MONTH_MAP[str(date.month).zfill(2)]
-        day = str(date.day).zfill(2)
-        return [day, month, year]
-    except:
-        return ['', '', '']
-
-def get_player_data(players_df, player_name):
-    player_row = players_df[players_df['Player'] == player_name]
-    if not player_row.empty:
-        return player_row.iloc[0, 3], player_row.iloc[0, 4], player_row.iloc[0, 5], player_row.iloc[0, 1]
+def convert_date_format(date_input):
+    # If it's a pandas Timestamp, convert to datetime
+    if isinstance(date_input, pd.Timestamp):
+        dt = date_input.to_pydatetime()
+    elif isinstance(date_input, datetime):
+        dt = date_input
+    elif isinstance(date_input, str):
+        dt = datetime.strptime(date_input, "%Y-%m-%d %H:%M:%S")
     else:
-        return '', '', '', ''
+        raise ValueError("Input must be a string, datetime, or pandas.Timestamp")
+
+    # Format based on the operating system
+    if platform.system() == "Windows":
+        return dt.strftime("%#d/%#m/%Y")  # Windows
+    else:
+        return dt.strftime("%-d/%-m/%Y")  # Mac/Linux
+
 
 def process_files(matches_path, players_path):
     matches_df = pd.read_excel(matches_path, header=0)
     players_df = pd.read_excel(players_path, header=0)
 
-    win_rows = []
-    lose_rows = []
+    output_rows = []
 
-    for i in range(len(matches_df)):
-        match_row = matches_df.iloc[i]
+    for _, match_row in matches_df.iterrows():
+        player_name = match_row.iloc[2]  # Column C
+        date = match_row.iloc[0]         # Column A
+        result = match_row.iloc[18]      # Column S
 
-        result = match_row.iloc[18] 
+        # Format date to "mm-dd"
+        try:
+            formatted_date = '"' + pd.to_datetime(date).strftime('%m-%d') + '"'
+        except:
+            formatted_date = '""'
 
-        match_date = format_date(match_row.iloc[0])
-        match_location = match_row.iloc[3] if not pd.isna(match_row.iloc[3]) else ''
+        # Match player data
+        player_row = players_df[players_df['Player'] == player_name]
+        if not player_row.empty:
+            birth_place = player_row.iloc[0, 1]  # Column B
+            date_series = pd.to_datetime([player_row.iloc[0, 2]])
+            date_of_birth = convert_date_format(date_series[0])  # Column C
+        else:
+            birth_place = ''
+            date_of_birth = ''
 
-        player_name = match_row.iloc[2]
+        row = [''] * 75
 
-        player_h, player_i, player_j, player_k = get_player_data(players_df, player_name)
+        # Fill known columns
+        row[52] = player_name       # BA
 
-        match_output = match_date + [match_location] + [''] * 3 + [player_h, player_i, player_j, player_k]
+        for i in range(53, 59):
+            row[i] = 1
+
+        row[59] = formatted_date   # BH
+
+        for i in range(60, 62):
+            row[i] = 1
+
+        row[62] = birth_place      # BK
+        row[63] = date_of_birth    # BL
+
+        for i in range(64, 74):
+            row[i] = 1
 
         if result == 'W':  # Win case
-            win_rows.append(match_output)
+            row[74] = 'WIN'             # BW
         elif result == 'L':  # Lose case
-            lose_rows.append(match_output)
+            row[74] = 'LOSE'            # BW
+        
 
-    header = ['Day', 'Month', 'Year', 'Location', '', '', '',
-              'H', 'I', 'J', 'Birth Place']
+        output_rows.append(row)
 
+    header_temps = ["Player Name", "Number", "Odds", "Projection", "Avg", "Home/Away Avg", "Home/Away", "Date",
+                "Stat Category", "Team", "Place of Birth", "Date of Birth", "Illumination", "Age", "Type",
+                "Moon Cycle", "Result", "H/A DIF", "H/A Results DIF", "H/A Spread Result", "AVG DIF", "H / A DIF", "RESULT O/U"]
+
+    headers = [""] * 52
+    headers += header_temps
+
+    output_df = pd.DataFrame(output_rows, columns=headers)
     out_dir = os.path.dirname(matches_path)
-    pd.DataFrame([header] + win_rows).to_csv(os.path.join(out_dir, "Win_Astro.csv"), index=False, header=False)
-    pd.DataFrame([header] + lose_rows).to_csv(os.path.join(out_dir, "Lose_Astro.csv"), index=False, header=False)
+    output_file = os.path.join(out_dir, "Tennis_Output_Example.xlsx")
+    output_df.to_excel(output_file, index=False)
 
-    result_label.config(text="Conversion complete!\nFiles saved next to input.", fg="green")
+    result_label.config(text="✅ Conversion complete!\nFile saved as 'Tennis_Output_Example.xlsx'", fg="green")
 
-# GUI logic
+# GUI functions
 def browse_matches():
     path = filedialog.askopenfilename(title="Select tennis_matches1.xlsx", filetypes=[("Excel files", "*.xlsx")])
     if path:
@@ -79,30 +111,31 @@ def run_conversion():
     matches_path = matches_path_var.get()
     players_path = players_path_var.get()
     if not matches_path or not players_path:
-        result_label.config(text="Please select both files first.", fg="red")
+        result_label.config(text="⚠️ Please select both files first.", fg="red")
         return
-    result_label.config(text="Processing...", fg="blue")
+    result_label.config(text="⏳ Processing...", fg="blue")
     root.update()
     try:
         process_files(matches_path, players_path)
     except Exception as e:
-        result_label.config(text=f"Error: {str(e)}", fg="red")
+        print(e)
+        result_label.config(text=f"❌ Error: {str(e)}", fg="red")
 
-# --- GUI SETUP ---
+# GUI setup
 root = tk.Tk()
-root.title("Match File Converter")
-root.geometry("500x250")
+root.title("🎾 Tennis Match File Converter")
+root.geometry("500x270")
 
 matches_path_var = tk.StringVar()
 players_path_var = tk.StringVar()
 
-tk.Button(root, text="Select Match File", command=browse_matches).pack(pady=(10, 0))
-tk.Label(root, textvariable=matches_path_var, wraplength=580).pack()
+tk.Button(root, text="📂 Select Match File", command=browse_matches).pack(pady=(10, 0))
+tk.Label(root, textvariable=matches_path_var, wraplength=480).pack()
 
-tk.Button(root, text="Select Player File", command=browse_players).pack(pady=(10, 0))
-tk.Label(root, textvariable=players_path_var, wraplength=580).pack()
+tk.Button(root, text="📂 Select Player File", command=browse_players).pack(pady=(10, 0))
+tk.Label(root, textvariable=players_path_var, wraplength=480).pack()
 
-tk.Button(root, text="Convert", command=run_conversion, bg="green", fg="white").pack(pady=20)
+tk.Button(root, text="🚀 Convert to Tennis_Output_Example.xlsx", command=run_conversion, bg="green", fg="white").pack(pady=20)
 
 result_label = tk.Label(root, text="", font=("Arial", 10))
 result_label.pack()
