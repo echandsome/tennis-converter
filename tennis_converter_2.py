@@ -17,9 +17,9 @@ def convert_date_format(date_input):
         raise ValueError("Input must be a string, datetime, or pandas.Timestamp")
 
     if platform.system() == "Windows":
-        return dt.strftime("%#d/%#m/%Y")
+        return dt.strftime("%#m/%#d/%Y")
     else:
-        return dt.strftime("%-d/%-m/%Y")
+        return dt.strftime("%-m/%-d/%Y")
 
 def process_files(matches_path, players_path):
     matches_df = pd.read_excel(matches_path, header=0)
