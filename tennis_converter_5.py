@@ -55,7 +55,11 @@ def process_bulk():
                     over_rows.append(latest)
             if over_rows:
                 df_over = pd.concat(over_rows)
-                over_filename = os.path.join(output_dir, f"OVER_{group_size}_{int(percent)}.csv")
+                if percent.is_integer():
+                    percent_str = str(int(percent))
+                else:
+                    percent_str = f"{percent:.2f}".replace(".", "p")
+                over_filename = os.path.join(output_dir, f"OVER_{group_size}_{percent_str}.csv")
                 df_over.to_csv(over_filename, index=False, header=False)
                 all_over_results.append(df_over)
 
@@ -69,7 +73,11 @@ def process_bulk():
                     under_rows.append(latest)
             if under_rows:
                 df_under = pd.concat(under_rows)
-                under_filename = os.path.join(output_dir, f"UNDER_{group_size}_{int(percent)}.csv")
+                if percent.is_integer():
+                    percent_str = str(int(percent))
+                else:
+                    percent_str = f"{percent:.2f}".replace(".", "p")
+                under_filename = os.path.join(output_dir, f"UNDER_{group_size}_{percent_str}.csv")
                 df_under.to_csv(under_filename, index=False, header=False)
                 all_under_results.append(df_under)
 
