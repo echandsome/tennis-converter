@@ -11,6 +11,11 @@ def col_letter_to_index(letter):
         total += (string.ascii_uppercase.index(char) + 1) * (26 ** i)
     return total - 1
 
+def clean_column_names(df):
+    # Replace any column name starting with 'Unnamed' with empty values
+    df.columns = [col if not col.startswith('Unnamed') else '' for col in df.columns]
+    return df
+
 def split_file_by_column(file_path, column_letter):
     ext = os.path.splitext(file_path)[1].lower()
     if ext == '.csv':
@@ -34,6 +39,9 @@ def split_file_by_column(file_path, column_letter):
     grouped = df.groupby(df[col_name])
 
     for group_name, group_df in grouped:
+        # Clean columns that are 'Unnamed'
+        group_df = clean_column_names(group_df)
+
         safe_name = str(group_name).replace("/", "_").replace("\\", "_")
         output_filename = f"split_{column_letter.upper()}_{safe_name}{ext}"
         output_path = os.path.join(output_dir, output_filename)
@@ -73,7 +81,7 @@ column_var = tk.StringVar()
 tk.Button(root, text="Select CSV/XLSX File", command=browse_file).pack(pady=(10, 0))
 tk.Label(root, textvariable=file_path_var, wraplength=480).pack()
 
-tk.Label(root, text="Enter Column Letter to Split By (e.g., P or Z):").pack(pady=(10, 0))
+tk.Label(root, text="Enter Column Letter to Split By (e.g., A or P):").pack(pady=(10, 0))
 tk.Entry(root, textvariable=column_var).pack()
 
 tk.Button(root, text="Split File", command=run_split, bg="green", fg="white").pack(pady=20)
