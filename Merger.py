@@ -25,7 +25,7 @@ def merge_files(folder_path):
         parent_folder = os.path.dirname(folder_path)
         output_path = os.path.join(parent_folder, "Merged_Output.csv")
         merged_df.to_csv(output_path, index=False, header=False)
-        result_label.config(text=f"✔ CSV merge complete!\nSaved as: {output_path}", fg="green")
+        result_label.config(text=f"CSV merge complete!\nSaved as: {output_path}", fg="green")
 
     elif ext == ".xlsx":
         # If files are XLSX, convert each to temporary CSV first
@@ -47,14 +47,14 @@ def merge_files(folder_path):
         output_path = os.path.join(parent_folder, "Merged_Output.xlsx")
         
         merged_df.to_excel(output_path, index=False, header=False)
-        result_label.config(text=f"✔ XLSX merge complete!\nSaved as: {output_path}", fg="green")
+        result_label.config(text=f"XLSX merge complete!\nSaved as: {output_path}", fg="green")
 
         # Clean up temp files
         for f in temp_csv_paths:
             os.remove(f)
 
     else:
-        result_label.config(text="❌ Unsupported file format in folder.", fg="red")
+        result_label.config(text="Unsupported file format in folder.", fg="red")
 
 # --- GUI logic ---
 
@@ -81,7 +81,7 @@ def run_merge():
 # --- GUI SETUP ---
 
 root = tk.Tk()
-root.title("Headerless File Merger")
+root.title("File Merger")
 root.geometry("500x200")
 
 folder_path_var = tk.StringVar()
