@@ -24,7 +24,7 @@ def convert_files(folder_path, file_type):
 
             elif file_type == 'csv' and file.lower().endswith('.csv'):
                 df = pd.read_csv(file_path)
-                df.to_excel(os.path.join(output_folder, filename_wo_ext + ".xlsx"), index=False)
+                df.to_excel(os.path.join(output_folder, filename_wo_ext + ".xlsx"), index=False, header=False)
                 converted += 1
 
         result_label.config(
@@ -59,17 +59,17 @@ root.title("Bulk XLSX ⇄ CSV Converter")
 root.geometry("500x300")
 
 folder_path_var = tk.StringVar()
-file_type_var = tk.StringVar()
+file_type_var = tk.StringVar(value='xlsx') 
 
 tk.Label(root, text="1. Select Folder with Files:").pack(pady=(10, 0))
 tk.Button(root, text="Browse Folder", command=browse_folder).pack()
 tk.Label(root, textvariable=folder_path_var, wraplength=480).pack()
 
-tk.Label(root, text="2. Choose the format of input files:").pack(pady=(15, 5))
+tk.Label(root, text="2. Select input file format:").pack(pady=(15, 5))
 radio_frame = tk.Frame(root)
 radio_frame.pack()
-tk.Radiobutton(radio_frame, text="From XLSX to CSV", variable=file_type_var, value='xlsx').pack(side=tk.LEFT, padx=10)
-tk.Radiobutton(radio_frame, text="From CSV to XLSX", variable=file_type_var, value='csv').pack(side=tk.LEFT, padx=10)
+tk.Radiobutton(radio_frame, text="XLSX to CSV", variable=file_type_var, value='xlsx').pack(side=tk.LEFT, padx=10)
+tk.Radiobutton(radio_frame, text="CSV to XLSX", variable=file_type_var, value='csv').pack(side=tk.LEFT, padx=10)
 
 tk.Button(root, text="Convert", command=run_bulk_conversion, bg="green", fg="white").pack(pady=20)
 
