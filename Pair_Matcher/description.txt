@@ -1,0 +1,9 @@
+just match up the player daily pairs with both files and create 1 output file in the formnat provded
+
+real quick the script is good but please remove no matches found rows
+
+not needed hehe
+
+this will make the file nice and smaller
+
+only keep pair matches please
