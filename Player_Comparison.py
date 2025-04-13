@@ -62,7 +62,7 @@ def process_file(input_path):
     out_path = os.path.join(os.path.dirname(input_path), "Player_Comparison.xlsx")
     result_df.to_excel(out_path, index=False)
 
-     # Auto-adjust column width
+    # Auto-adjust column width
     wb = openpyxl.load_workbook(out_path)
     ws = wb.active
 
