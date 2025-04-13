@@ -28,16 +28,14 @@ def process_combined_output(comparison_path, daily_path):
         # Search for player B's info
         daily_b = daily_df[daily_df.iloc[:, 0].astype(str).str.strip() == player_b]
 
-        if not daily_a.empty or not daily_b.empty:
+        if daily_a.empty or daily_b.empty:
             continue
 
-        if not daily_a.empty:
-            daily_a_row = daily_a.iloc[0].tolist()
-            output_rows.append(comp_values + [''] + daily_a_row)
-        
-        if not daily_b.empty:
-            daily_b_row = daily_b.iloc[0].tolist()
-            output_rows.append(comp_values + [''] + daily_b_row)
+        daily_a_row = daily_a.iloc[0].tolist()
+        output_rows.append(comp_values + [''] + daily_a_row)
+    
+        daily_b_row = daily_b.iloc[0].tolist()
+        output_rows.append(comp_values + [''] + daily_b_row)
 
         # Insert an empty row after each pair
         output_rows.append([''] * (len(comp_values) + 1 + len(daily_df.columns)))
