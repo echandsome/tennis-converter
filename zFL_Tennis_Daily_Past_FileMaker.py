@@ -37,29 +37,29 @@ def process_files(matches_path, players_path):
     lose_rows = []
 
     for i in range(1, len(matches_df), 3):
-        if i + 1 >= len(matches_df):
-            break
+        try:
+            lose_row = matches_df.iloc[i - 1]
+            win_row = matches_df.iloc[i]
 
-        lose_row = matches_df.iloc[i - 1]
-        win_row = matches_df.iloc[i]
+            lose_date = format_date(lose_row.iloc[0])
+            win_date = format_date(win_row.iloc[0])
 
-        lose_date = format_date(lose_row.iloc[0])
-        win_date = format_date(win_row.iloc[0])
+            lose_location = lose_row.iloc[3] if not pd.isna(lose_row.iloc[3]) else ''
+            win_location = win_row.iloc[3] if not pd.isna(win_row.iloc[3]) else ''
 
-        lose_location = lose_row.iloc[3] if not pd.isna(lose_row.iloc[3]) else ''
-        win_location = win_row.iloc[3] if not pd.isna(win_row.iloc[3]) else ''
+            lose_player_name = lose_row.iloc[2]
+            win_player_name = win_row.iloc[2]
 
-        lose_player_name = lose_row.iloc[2]
-        win_player_name = win_row.iloc[2]
+            l_player_h, l_player_i, l_player_j, l_player_k = get_player_data(players_df, lose_player_name)
+            w_player_h, w_player_i, w_player_j, w_player_k = get_player_data(players_df, win_player_name)
 
-        l_player_h, l_player_i, l_player_j, l_player_k = get_player_data(players_df, lose_player_name)
-        w_player_h, w_player_i, w_player_j, w_player_k = get_player_data(players_df, win_player_name)
+            lose_output = lose_date + [lose_location] + [''] * 3 + [l_player_h, l_player_i, l_player_j, l_player_k]
+            win_output = win_date + [win_location] + [''] * 3 + [w_player_h, w_player_i, w_player_j, w_player_k]
 
-        lose_output = lose_date + [lose_location] + [''] * 3 + [l_player_h, l_player_i, l_player_j, l_player_k]
-        win_output = win_date + [win_location] + [''] * 3 + [w_player_h, w_player_i, w_player_j, w_player_k]
-
-        win_rows.append(win_output)
-        lose_rows.append(lose_output)
+            win_rows.append(win_output)
+            lose_rows.append(lose_output)
+        except IndexError:
+            continue
 
     header = ['Day', 'Month', 'Year', 'Location', '', '', '',
               'H', 'I', 'J', 'Birth Place']
