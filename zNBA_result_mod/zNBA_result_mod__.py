@@ -1,12 +1,11 @@
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+import asyncio
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from playwright.sync_api import sync_playwright
 import tkinter as tk
 from tkinter import filedialog, messagebox
+import time
 
 def format_date(csv_date):
     cleaned_date = str(csv_date).replace('"""', '').replace('"', '')
@@ -20,34 +19,47 @@ def format_date(csv_date):
         month = month[1:]
     return f"{month}/{day}"
 
-def fetch_result_for_player(driver, player_name, date, category):
-    try:
-        url = f"https://www.bettingpros.com/nba/props/{str(player_name).lower()}/{str(category).lower()}/"
-        print(f"Accessing URL: {url}")
-        driver.get(url)
 
-        table = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//section[4]//table"))
-        )
-        rows = table.find_elements(By.TAG_NAME, "tr")
-        
-        for row in rows:
-            cols = row.find_elements(By.TAG_NAME, "td")
-            if len(cols) > 0:
-                table_date = cols[0].text.strip()
-                formatted_date = format_date(date)
-                if table_date == formatted_date:
-                    stat_value = cols[6].text.strip().replace("O", "").replace("U", "").strip()
-                    try:
-                        stat_value = int(stat_value)
-                    except ValueError:
-                        return None
-                    print(f"Found result for {player_name}: {stat_value}")
-                    return stat_value
-        print(f"No matching date found for {player_name}")
+def fetch_result_for_player(player_name, date, category, results, lock):
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+
+            url = f"https://www.bettingpros.com/nba/props/{str(player_name).lower()}/{str(category).lower()}/"
+            print(f"Accessing URL: {url}")
+
+            for attempt in range(1, 5 + 1):
+                try:
+                    page.goto(url, timeout=25000)
+                    page.wait_for_load_state("networkidle")
+                    page.wait_for_selector("section:nth-of-type(4) table", timeout=15000)
+                except Exception as e:
+                    if attempt == 5:
+                        return False
+                    else:
+                        time.sleep(2) 
+           
+            rows = page.query_selector_all("section:nth-of-type(4) table tr")
+            stat_value = 0
+            for row in rows:
+                cols = row.query_selector_all("td")
+                if len(cols) > 0:
+                    table_date = cols[0].inner_text().strip()
+                    formatted_date = format_date(date)
+                    if table_date == formatted_date:
+                        stat_text = cols[6].inner_text().strip().replace("O", "").replace("U", "").strip()
+                        try:
+                            stat_value = int(stat_text)
+                            break
+                        except ValueError:
+                            continue
+
+            results.append((player_name, date, category, stat_value))
+            browser.close()
     except Exception as e:
         print(f"Error fetching data for {player_name}: {e}")
-    return None
+
 
 def browse_csv():
     csv_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
@@ -63,10 +75,6 @@ def scrape_results():
 
     try:
         df = pd.read_csv(csv_path)
-
-        options = webdriver.ChromeOptions()
-        options.add_argument("--start-maximized")
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         category_mapping = {
             "3Pts Made": "threes",
             "Points + Assists": "points-assists",
@@ -74,44 +82,50 @@ def scrape_results():
             "Rebounds + Assists": "rebounds-assists",
             "Pts + Ast + Reb": "points-assists-rebounds"
         }
+
         results = []
-        for index, row in df.iterrows():
-            player_name = row.get('Player Name', '')
-            date = str(row.get('Date', '')).replace('""', '')
-            category = row.get('Stat Category', '')
+        lock = threading.Lock()
 
-            if category in category_mapping:
-                category = category_mapping[category]
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = []
+            for index, row in df.iterrows():
+                player_name = row.get('Player Name', '')
+                date = str(row.get('Date', '')).replace('""', '')
+                category = row.get('Stat Category', '')
 
-            if not isinstance(player_name, str) or not isinstance(category, str):
-                continue
+                if category in category_mapping:
+                    category = category_mapping[category]
 
-            print(f"Fetching data for player: {player_name}, Date: {date}, Category: {category}")
+                if not isinstance(player_name, str) or not isinstance(category, str):
+                    continue
 
-            result = fetch_result_for_player(driver, player_name, date, category)
-            if result is not None:
-                row['Result'] = result
-                row['H/A DIF'] = row.iloc[1] - row.iloc[5]
-                row['H/A Results DIF'] = row.iloc[1] - row['Result']
-                
-                if row['H/A DIF'] != 0:
-                    if (row['H/A DIF'] < 0 and row['H/A Results DIF'] < 0) or (row['H/A DIF'] > 0 and row['H/A Results DIF'] > 0):
-                        row['H/A Spread Result'] = "Win"
-                    else:
-                        row['H/A Spread Result'] = "Lose"
-                    results.append(row)
+                futures.append(executor.submit(fetch_result_for_player, player_name, date, category, results, lock))
 
-        driver.quit()
+            for future in futures:
+                future.result()
 
         if results:
-            updated_df = pd.DataFrame(results)
-            updated_df = updated_df.sort_values(by='H/A Results DIF', ascending=True)
+            result_df = pd.DataFrame(results, columns=['Player Name', 'Date', 'Stat Category', 'Result'])
+            merged_df = pd.merge(df, result_df, on=['Player Name', 'Date', 'Stat Category'])
+            merged_df['H/A DIF'] = merged_df.iloc[:, 1] - merged_df.iloc[:, 5]
+            merged_df['H/A Results DIF'] = merged_df.iloc[:, 1] - merged_df['Result']
 
+            def spread_result(row):
+                if row['H/A DIF'] != 0:
+                    if (row['H/A DIF'] < 0 and row['H/A Results DIF'] < 0) or (row['H/A DIF'] > 0 and row['H/A Results DIF'] > 0):
+                        return "Win"
+                    else:
+                        return "Lose"
+                return ""
+
+            merged_df['H/A Spread Result'] = merged_df.apply(spread_result, axis=1)
+
+            updated_df = merged_df.sort_values(by='H/A Results DIF', ascending=True)
             negative_df = updated_df[updated_df['H/A DIF'] < 0]
             positive_df = updated_df[updated_df['H/A DIF'] > 0]
 
             if not negative_df.empty and not positive_df.empty:
-                blank_rows = pd.DataFrame([[""] * len(updated_df.columns)] * 2, columns=updated_df.columns)
+                blank_rows = pd.DataFrame([[''] * len(updated_df.columns)] * 2, columns=updated_df.columns)
                 updated_df = pd.concat([negative_df, blank_rows, positive_df], ignore_index=True)
 
             category_name = df['Stat Category'].iloc[0].replace(" ", "_")
@@ -126,7 +140,7 @@ def scrape_results():
         messagebox.showerror("Error", f"An error occurred: {e}")
 
 root = tk.Tk()
-root.title("NBA Props Scraper")
+root.title("NBA Props Scraper (Playwright Boosted)")
 
 csv_path_label = tk.Label(root, text="Select CSV File:")
 csv_path_label.grid(row=0, column=0, padx=10, pady=10)
