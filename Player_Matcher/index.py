@@ -12,7 +12,7 @@ def process_and_fill(matches_path, players_path):
     # Indexes
     match_name_index = 2  # Column C
     player_name_index = 0  # Column A in players file
-    player_info_indices = [1, 3, 4, 5]  # B, D, E, F in players file
+    player_info_indices = [3, 4, 5, 1]  # B, D, E, F in players file
     target_match_indices = [14, 15, 16, 17, 18]  # O to S (but now shifted: leave O blank)
 
     # Build player info dictionary
