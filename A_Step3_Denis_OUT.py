@@ -104,23 +104,6 @@ def process_file():
                 ws.cell(row=row, column=6).fill = gray_fill  # Column F is 6
                 ws.cell(row=row, column=7).fill = gray_fill  # Column G is 7
 
-
-
-        # Move the rows as per the new order: green, red, empty, gray
-        all_rows = green_rows + red_rows+ gray_rows
-        for row in all_rows:
-        	print(row)
-
-        row_offset = 1  # Start from row 2 (since row 1 is the header)
-
-        for col in range(1, ws.max_column + 1):  # Iterate through columns
-        	ws.cell(row=row_offset, column=col).value = ws.cell(row=row, column=col).value
-        	ws.cell(row=row, column=col).value = None
-        row_offset += 1  # Move to the next row in the Excel sheet
-
-
-		
-
         # Save the file with all formatting applied
         wb.save(output_file)
 
