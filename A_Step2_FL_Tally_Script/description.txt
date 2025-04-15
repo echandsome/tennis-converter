@@ -1,0 +1,11 @@
+this one removes the last result too
+
+heres the input file to test
+
+in this script, Alexei Popyrin
+
+the last player gets removed
+
+or cut off
+
+in the output file
