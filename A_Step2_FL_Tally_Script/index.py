@@ -30,20 +30,23 @@ def separate_player_data(data):
     player_dfs = {}
     current_player_data = []
     player_count = 1
-    
+
     for _, row in data.iterrows():
         if pd.isna(row['Partner A']) and pd.isna(row['Partner B']):
             if current_player_data:
                 player_df = pd.DataFrame(current_player_data)
-                # Add an empty "Remarks" column when creating the DataFrame
                 player_df['Remarks'] = ""
-
                 player_dfs[f'Player_{player_count}'] = player_df
                 player_count += 1
                 current_player_data = []
         else:
             current_player_data.append(row)
-    
+
+    if current_player_data:
+        player_df = pd.DataFrame(current_player_data)
+        player_df['Remarks'] = ""
+        player_dfs[f'Player_{player_count}'] = player_df
+
     return player_dfs
 
 # Function to handle file selection and processing
