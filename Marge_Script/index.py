@@ -183,8 +183,9 @@ def step2_aggregate_players(input_path):
 def step3_final_process(input_path):
     try:
         
+        input_filename = os.path.splitext(os.path.basename(entry2.get()))[0]
         # Create the output file name by adding "_fix" before the extension
-        output_file = f"final_fix.xlsx"
+        output_file = f"result_{input_filename}.xlsx"
 
         # Load the Excel file into a pandas DataFrame
         df = pd.read_excel(input_path)
