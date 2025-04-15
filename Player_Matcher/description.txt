@@ -1,0 +1,9 @@
+1st job is to grab the place of birth and date of birth (4 columns of data)
+
+2 input files 1 output file
+
+if player match isnt found, please keep the player in the list so I can manually add it
+
+the output file should have the same number of rows as the input file
+
+so it grabs columns B D E F from player file

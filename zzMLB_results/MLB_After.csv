@@ -1,0 +1,169 @@
+Player Name,Number,Odds,Projection,Avg,Home/Away Avg,Home/Away,Date,Stat Category,Team,Address,BirthDate,Illumination,Age,Type,Phase,Result,H/A DIF,H/A Results DIF,H/A Spread Result
+kyle-tucker,0.5,O +400 | U -550,Under,1.0,1.0,AWAY,"""04-01""",Runs,CHC,"Tampa, FL, USA",1/17/1997,62.60%,8.6 days,Waxing Gibbous,WAX,3,-0.5,-2.5,Win
+andrew-benintendi,0.5,O +650 | U -1000,Under,1.0,1.0,HOME,"""04-01""",Runs,CWS,"Cincinnati, OH, USA",7/6/1994,5.10%,27.4 days,Waning Crescent,wane,2,-0.5,-1.5,Win
+randy-arozarena,0.5,O +500 | U -700,Under,1.0,1.0,HOME,"""04-01""",Runs,SEA,"Havana,Cuba",2/28/1995,0.90%,28.7 days,Waning Crescent,wane,1,-0.5,-0.5,Win
+lars-nootbaar,0.5,O +600 | U -1000,Under,1.0,1.0,HOME,"""04-01""",Runs,STL,"El Segundo, CA, USA",9/8/1997,29.90%,5.4 days,Waxing Crescent,WAX,1,-0.5,-0.5,Win
+michael-busch-2b,0.5,O +525 | U -750,Under,1.0,1.0,AWAY,"""04-01""",Runs,CHC,"Inver Grove Heights, MN, USA",11/9/1997,62.70%,8.6 days,Waxing Gibbous,WAX,1,-0.5,-0.5,Win
+andres-giminez,0.5,O +900 | U -2000,Under,1.0,1.0,HOME,"""04-01""",Runs,TOR,"Barquisimeto,Venezuela",9/4/1998,92.60%,12.2 days,Waxing Gibbous,WAX,1,-0.5,-0.5,Win
+nolan-gorman,0.5,O +425 | U -600,Under,1.0,1.0,HOME,"""04-01""",Runs,STL,"Phoenix, AZ, USA",5/10/2000,41.30%,6.5 days,First Quarter,WAX,1,-0.5,-0.5,Win
+dansby-swanson,0.5,O +700 | U -1100,Under,1.0,1.0,AWAY,"""04-01""",Runs,CHC,"Kennesaw, GA, USA",2/11/1994,1.50%,1.1 days,Waxing Crescent,WAX,0,-0.5,0.5,Lose
+enrique-hernandez,0.5,O +800 | U -1401,Under,1.0,1.0,HOME,"""04-01""",Runs,LAD,"San Juan,Puerto Rico",8/24/1991,98.50%,13.6 days,Waxing Gibbous,WAX,0,-0.5,0.5,Lose
+otto-lopez,0.5,O +950 | U -2000,Under,1.0,1.0,HOME,"""04-01""",Runs,MIA,"Santo Domingo,Dominican Republic",10/1/1998,71.40%,9.5 days,Waxing Gibbous,WAX,0,-0.5,0.5,Lose
+luis-torrens,0.5,O +1100 | U -2500,Under,1.0,1.0,AWAY,"""04-01""",Runs,NYM,"Valencia,Venezuela",5/2/1996,97.80%,13.3 days,Waxing Gibbous,WAX,0,-0.5,0.5,Lose
+caleb-raleigh,0.5,O +375 | U -525,Under,1.0,1.0,HOME,"""04-01""",Runs,SEA,"Cullowhee, NC, USA",11/26/1996,98.60%,15.8 days,Waning Gibbous,wane,0,-0.5,0.5,Lose
+lucas-raley,0.5,O +450 | U -625,Under,1.0,1.0,HOME,"""04-01""",Runs,SEA,"Hinckley, OH, USA",9/19/1994,99.50%,14.2 days,Full Moon,WAX,0,-0.5,0.5,Lose
+andrew-mccutchen,0.5,O +700 | U -1100,Under,1.0,1.0,AWAY,"""04-01""",Runs,PIT,"Fort Meade, FL, USA",10/10/1986,43.10%,6.7 days,First Quarter,WAX,0,-0.5,0.5,Lose
+andrew-vaughn-1b,0.5,O +575 | U -800,Under,1.0,1.0,HOME,"""04-01""",Runs,CWS,"Santa Rosa, CA, USA",4/3/1998,41.90%,6.6 days,First Quarter,WAX,0,-0.5,0.5,Lose
+michael-harris,0.5,O +625 | U -1000,Under,1.0,1.0,AWAY,"""04-01""",Runs,ATL,"DeKalb, GA, USA",3/7/2001,90.40%,11.8 days,Waxing Gibbous,WAX,0,-0.5,0.5,Lose
+daniel-schneemann,0.5,O +1250 | U -3003,Under,1.0,1.0,AWAY,"""04-01""",Runs,CLE,"San Diego, CA, USA",1/23/1997,99.80%,14.5 days,Full Moon,WAX,0,-0.5,0.5,Lose
+maikel-garcia,0.5,O +1000 | U -3497,Under,1.0,1.0,AWAY,"""04-01""",Runs,KC,"La Sabana,Venezuela",3/3/2000,7.00%,27.0 days,Waning Crescent,wane,0,-0.5,0.5,Lose
+jose-ramirez,0.5,O +600 | U -900,Under,1.0,1.0,AWAY,"""04-01""",Runs,CLE,"Bani,Dominican Republic",9/17/1992,75.20%,19.7 days,Waning Gibbous,wane,0,-0.5,0.5,Lose
+elly-de-la-cruz,0.5,O +500 | U -700,Under,2.0,2.0,HOME,"""04-01""",Runs,CIN,"Sabana Grande de Boya,Dominican Republic",1/11/2002,3.80%,27.7 days,Waning Crescent,wane,0,-1.5,0.5,Lose
+jasrado-chisholm,0.5,O +500 | U -941,Under,2.0,2.0,HOME,"""04-01""",Runs,NYY,"Nassau,Bahamas",2/1/1998,27.20%,5.2 days,Waxing Crescent,WAX,0,-1.5,0.5,Lose
+jake-burger-3b,0.5,O +375 | U -525,Under,1.0,1.0,AWAY,"""04-01""",Runs,TEX,"St. Louis, MO, USA",4/10/1996,55.90%,21.6 days,Waning Gibbous,wane,0,-0.5,0.5,Lose
+aaron-judge,0.5,O +210 | U -250,Under,1.0,1.0,HOME,"""04-01""",Runs,NYY,"Linden, CA, USA",4/26/1992,34.10%,23.7 days,Waning Crescent,wane,0,-0.5,0.5,Lose
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+jackson-merrill,0.5,O +700 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"Baltimore, MD, USA",4/19/2003,90.80%,17.7 days,Waning Gibbous,wane,2,0.5,-1.5,Lose
+jasson-dominguez,0.5,O +725 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,NYY,"Esperanza,Dominican Republic",2/7/2003,35.50%,6.0 days,Waxing Crescent,WAX,2,0.5,-1.5,Lose
+christian-yelich,0.5,O +525 | U -750,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Thousand Oaks, CA, USA",12/5/1991,0.20%,29.2 days,Waning Crescent,wane,2,0.5,-1.5,Lose
+yandy-diaz,0.5,O +500 | U -750,Under,0.0,0.0,HOME,"""04-01""",Runs,TB,"Sagua la Grande,Cuba",8/8/1991,3.00%,27.9 days,Waning Crescent,wane,2,0.5,-1.5,Lose
+george-springer,0.5,O +700 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,TOR,"New Britain, CT, USA",9/19/1989,79.50%,19.2 days,Waning Gibbous,wane,2,0.5,-1.5,Lose
+corbin-carroll-of,0.5,O +525 | U -750,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Seattle, WA, USA",8/21/2000,63.80%,20.8 days,Waning Gibbous,wane,2,0.5,-1.5,Lose
+brandon-lowe,0.5,O +400 | U -525,Under,0.0,0.0,HOME,"""04-01""",Runs,TB,"Suffolk, VA, USA",7/6/1994,5.20%,27.4 days,Waning Crescent,wane,2,0.5,-1.5,Lose
+brent-rooker,0.5,O +400 | U -550,Under,0.0,0.0,HOME,"""04-01""",Runs,ATH,"Germantown, TN, USA",11/1/1994,5.30%,27.3 days,Waning Crescent,wane,2,0.5,-1.5,Lose
+victor-scott,0.5,O +825 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,STL,"Atlanta, GA, USA",2/12/2001,77.60%,19.4 days,Waning Gibbous,wane,1,0.5,-0.5,Lose
+xavier-edwards-ss,0.5,O +1600 | U -10000,Under,0.0,0.0,HOME,"""04-01""",Runs,MIA,"Mineola, NY, USA",8/9/1999,4.40%,27.5 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+alejandro-kirk,0.5,O +825 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,TOR,"Tijuana, Baja California, Mexico",11/6/1998,92.70%,17.3 days,Waning Gibbous,wane,1,0.5,-0.5,Lose
+tyler-france,0.5,O +625 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Downey, CA, USA",7/13/1994,18.20%,4.1 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+nolan-schanuel,0.5,O +1500 | U -5000,Under,0.0,0.0,AWAY,"""04-01""",Runs,LAA,"Boca Raton, FL, USA",2/14/2002,5.70%,2.2 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+jacob-young,0.5,O +2000 | U -20000,Under,0.0,0.0,AWAY,"""04-01""",Runs,WSH,"Ponte Vedra, FL, USA",7/27/1999,98.30%,13.5 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+nick-maton,0.5,O +700 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,CWS,"Chatham, IL, USA",2/18/1997,84.10%,10.9 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+luis-rengifo,0.5,O +800 | U -1401,Under,0.0,0.0,AWAY,"""04-01""",Runs,LAA,"Naguanagua,Venezuela",2/26/1997,87.00%,18.2 days,Waning Gibbous,wane,1,0.5,-0.5,Lose
+mookie-betts,0.5,O +625 | U -1000,Under,0.0,0.0,HOME,"""04-01""",Runs,LAD,"Nashville, TN, USA",10/7/1992,80.90%,10.5 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+yoan-moncada,0.5,O +850 | U -1600,Under,0.0,0.0,AWAY,"""04-01""",Runs,LAA,"Cienfuegos,Cuba",5/27/1995,2.70%,28.0 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+thomas-edman,0.5,O +700 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,LAD,"Pontiac, MI, USA",5/9/1995,61.60%,8.5 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+jonah-bride,0.5,O +950 | U -2000,Under,0.0,0.0,HOME,"""04-01""",Runs,MIA,"Owasso, OK, USA",12/27/1995,30.50%,5.5 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+jacob-cronenworth,0.5,O +875 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"St. Clair, MI, USA",1/21/1994,60.90%,8.4 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+griffin-conine,0.5,O +650 | U -1000,Under,0.0,0.0,HOME,"""04-01""",Runs,MIA,"Plantation, FL, USA",7/11/1997,31.60%,5.6 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+jose-altuve,0.5,O +1050 | U -2500,Under,0.0,0.0,HOME,"""04-01""",Runs,HOU,"Maracay,Venezuela",5/6/1990,87.70%,11.4 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+patrick-bailey,0.5,O +700 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,SF,"Greensboro, NC, USA",5/29/1999,98.80%,13.8 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+harrison-bader,0.5,O +825 | U -1401,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Bronxville, NY, USA",6/3/1994,28.20%,24.3 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+anthony-volpe,0.5,O +875 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,NYY,"New York, NY, USA",4/28/2001,24.70%,4.9 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+willi-castro,0.5,O +625 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Rio Piedras,Puerto Rico",4/24/1997,97.90%,16.1 days,Waning Gibbous,wane,1,0.5,-0.5,Lose
+brice-turang,0.5,O +1300 | U -3003,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Corona, CA, USA",11/21/1999,93.60%,12.4 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+zach-mckinstry,0.5,O +825 | U -1401,Under,0.0,0.0,AWAY,"""04-01""",Runs,DET,"Toledo, OH, USA",4/29/1995,0.00%,29.5 days,New Moon,wane,1,0.5,-0.5,Lose
+masyn-winn-p,0.5,O +1150 | U -2500,Under,0.0,0.0,HOME,"""04-01""",Runs,STL,"Katy, TX, USA",3/21/2002,38.60%,6.3 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+jordan-walker,0.5,O +750 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,STL,"Stone Mountain, GA, USA",5/22/2002,75.20%,9.8 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+wyatt-langford,0.5,O +450 | U -625,Under,0.0,0.0,AWAY,"""04-01""",Runs,TEX,"Trenton, FL, USA",11/15/2001,0.30%,0.5 days,New Moon,wane,1,0.5,-0.5,Lose
+ryan-jeffers,0.5,O +575 | U -800,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Raleigh, NC, USA",6/3/1997,3.40%,27.9 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+lawrence-butler,0.5,O +700 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,ATH,"Burlington, NJ, USA",7/10/2000,65.20%,8.8 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+austin-wells,0.5,O +675 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,NYY,"Scottsdale, AZ, USA",7/12/1999,0.20%,29.2 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+kyle-stowers,0.5,O +625 | U -1000,Under,0.0,0.0,HOME,"""04-01""",Runs,MIA,"El Cajon, CA, USA",1/2/1998,12.80%,3.4 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+seiya-suzuki,0.5,O +625 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,CHC,"Arakawa,Japan",8/18/1994,91.10%,11.9 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+eugenio-suarez,0.5,O +525 | U -750,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Puerto Ordaz,Venezuela",7/18/1991,42.60%,6.7 days,First Quarter,WAX,1,0.5,-0.5,Lose
+pavin-smith,0.5,O +675 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Jupiter, FL, USA",2/6/1996,97.40%,16.2 days,Waning Gibbous,wane,1,0.5,-0.5,Lose
+ian-happ,0.5,O +475 | U -650,Under,0.0,0.0,AWAY,"""04-01""",Runs,CHC,"Pittsburgh, PA, USA",8/12/1994,24.40%,4.8 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+jonny-deluca,0.5,O +900 | U -2000,Under,0.0,0.0,HOME,"""04-01""",Runs,TB,"Thousand Oaks, CA, USA",7/10/1998,99.40%,15.5 days,Waning Gibbous,wane,1,0.5,-0.5,Lose
+geraldo-perdomo,0.5,O +1300 | U -3003,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Santo Domingo,Dominican Republic",10/22/1999,89.70%,11.7 days,Waxing Gibbous,WAX,1,0.5,-0.5,Lose
+william-contreras,0.5,O +475 | U -700,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Puerto Cabello,Venezuela",12/24/1997,26.30%,24.5 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+heliot-ramos-of,0.5,O +525 | U -750,Under,0.0,0.0,AWAY,"""04-01""",Runs,SF,"Humacao,Puerto Rico",9/7/1999,6.30%,27.1 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+ketel-marte,0.5,O +450 | U -625,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Nizao,Dominican Republic",10/12/1993,12.50%,26.1 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+fernando-tatis-jr,0.5,O +400 | U -525,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"San Pedro De Macoris,Dominican Republic",1/2/1999,99.90%,14.8 days,Full Moon,WAX,1,0.5,-0.5,Lose
+manny-machado,0.5,O +400 | U -550,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"Miami, FL, USA",7/6/1992,37.00%,6.1 days,Waxing Crescent,WAX,1,0.5,-0.5,Lose
+marcell-ozuna,0.5,O +450 | U -625,Under,0.0,0.0,AWAY,"""04-01""",Runs,ATL,"Santo Domingo,Dominican Republic",11/12/1990,20.80%,25.1 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+mike-trout,0.5,O +450 | U -625,Under,0.0,0.0,AWAY,"""04-01""",Runs,LAA,"Vineland, NJ, USA",8/7/1991,9.00%,26.7 days,Waning Crescent,wane,1,0.5,-0.5,Lose
+matt-thaiss,0.5,O +700 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,CWS,"Jackson, NJ, USA",5/6/1995,31.00%,5.5 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+brooks-baldwin,0.5,O +875 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,CWS,"Whiteville, NC, USA",8/15/2000,99.90%,14.8 days,Full Moon,WAX,0,0.5,0.5,Win
+ryan-bliss,0.5,O +800 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,SEA,"Burbank, CA, USA",12/13/1999,21.20%,4.5 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+brendan-rodgers,0.5,O +1050 | U -2500,Under,0.0,0.0,HOME,"""04-01""",Runs,HOU,"Winter Park, FL, USA",8/9/1996,19.30%,25.3 days,Waning Crescent,wane,0,0.5,0.5,Win
+miguel-rojas,0.5,O +1000 | U -3497,Under,0.0,0.0,HOME,"""04-01""",Runs,LAD,"Los Teques,Venezuela",2/24/1989,88.40%,18.0 days,Waning Gibbous,wane,0,0.5,0.5,Win
+gabriel-moreno,0.5,O +1000 | U -2000,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Barquisimeto,Venezuela",2/14/2000,61.50%,8.5 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+rowdy-tellez,0.5,O +600 | U -1000,Under,0.0,0.0,HOME,"""04-01""",Runs,SEA,"Sacramento, CA, USA",3/16/1995,99.20%,14.0 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+victor-robles,0.5,O +750 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,SEA,"Santo Domingo Este,Dominican Republic",5/19/1997,88.90%,11.6 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+nolan-arenado,0.5,O +750 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,STL,"Newport Beach, CA, USA",4/16/1991,3.30%,1.7 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+jose-miranda,0.5,O +650 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Manati,Puerto Rico",6/29/1998,27.90%,5.2 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+bo-naylor,0.5,O +875 | U -1600,Under,0.0,0.0,AWAY,"""04-01""",Runs,CLE,"Mississauga, ON, Canada",2/21/2000,96.60%,16.5 days,Waning Gibbous,wane,0,0.5,0.5,Win
+joey-ortiz,0.5,O +1050 | U -2500,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Garden Grove, CA, USA",7/14/1998,73.80%,19.9 days,Waning Gibbous,wane,0,0.5,0.5,Win
+yainer-diaz-c,0.5,O +825 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,HOU,"Azua,Dominican Republic",9/21/1998,1.00%,0.9 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+andy-pages,0.5,O +825 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,LAD,"Havana,Cuba",12/8/2000,86.20%,11.2 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+bo-bichette,0.5,O +700 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,TOR,"Orlando, FL, USA",3/5/1998,45.70%,7.0 days,First Quarter,WAX,0,0.5,0.5,Win
+lenyn-sosa,0.5,O +900 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,CWS,"Puerto Ordaz,Venezuela",1/25/2000,78.90%,19.3 days,Waning Gibbous,wane,0,0.5,0.5,Win
+miguel-vargas,0.5,O +650 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,CWS,"La Habana,Cuba",11/17/1999,56.30%,8.0 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+jung-lee,0.5,O +800 | U -1558,Under,0.0,0.0,AWAY,"""04-01""",Runs,SF,"Seoul,Republic of Korea",8/20/1998,4.20%,27.6 days,Waning Crescent,wane,0,0.5,0.5,Win
+kameron-misner-of,0.5,O +725 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,TB,"Poplar Bluff, MO, USA",1/8/1998,76.60%,10.0 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+colt-keith,0.5,O +800 | U -1401,Under,0.0,0.0,AWAY,"""04-01""",Runs,DET,"Zanesville, OH, USA",8/14/2001,27.20%,24.4 days,Waning Crescent,wane,0,0.5,0.5,Win
+carlos-santana,0.5,O +675 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,CLE,"Santo Domingo,Dominican Republic",4/8/1986,0.40%,29.0 days,Waning Crescent,wane,0,0.5,0.5,Win
+miguel-amaya-c,0.5,O +1150 | U -2500,Under,0.0,0.0,AWAY,"""04-01""",Runs,CHC,"Herrera,Panama",3/9/1999,58.70%,21.3 days,Waning Gibbous,wane,0,0.5,0.5,Win
+max-muncy-ss,0.5,O +675 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,ATH,"Midland, TX, USA",8/25/1990,19.90%,4.3 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+nolan-jones-3b,0.5,O +1050 | U -2500,Under,0.0,0.0,AWAY,"""04-01""",Runs,CLE,"Langhorne, PA, USA",5/7/1998,82.70%,10.7 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+jeremy-pena,0.5,O +950 | U -2000,Under,0.0,0.0,HOME,"""04-01""",Runs,HOU,"Santo Domingo,Dominican Republic",9/22/1997,62.30%,21.0 days,Waning Gibbous,wane,0,0.5,0.5,Win
+oliver-dunn,0.5,O +850 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Salt Lake City, UT, USA",9/2/1997,0.70%,0.7 days,New Moon,wane,0,0.5,0.5,Win
+isaac-paredes,0.5,O +875 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,HOU,"Hermosillo, SO, Mexico",2/18/1999,8.70%,2.8 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+pedro-pages,0.5,O +875 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,STL,"Maracay,Venezuela",9/17/1998,9.20%,26.6 days,Waning Crescent,wane,0,0.5,0.5,Win
+kyle-manzardo,0.5,O +750 | U -1200,Under,0.0,0.0,AWAY,"""04-01""",Runs,CLE,"Couer d'Alene, ID, USA",7/18/2000,97.10%,16.4 days,Waning Gibbous,wane,0,0.5,0.5,Win
+jose-siri,0.5,O +875 | U -1600,Under,0.0,0.0,AWAY,"""04-01""",Runs,NYM,"Sabana Grande de Boya,Dominican Republic",7/22/1995,22.20%,24.9 days,Waning Crescent,wane,0,0.5,0.5,Win
+oswaldo-cabrera,0.5,O +1300 | U -3003,Under,0.0,0.0,HOME,"""04-01""",Runs,NYY,"Guarenas,Venezuela",3/1/1999,98.60%,13.7 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+carlos-correa,0.5,O +600 | U -900,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Ponce,Puerto Rico",9/22/1994,94.50%,17.0 days,Waning Gibbous,wane,0,0.5,0.5,Win
+trey-sweeney,0.5,O +650 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,DET,"Louisville, KY, USA",4/24/2000,72.00%,20.0 days,Waning Gibbous,wane,0,0.5,0.5,Win
+jake-fraley,0.5,O +950 | U -2000,Under,0.0,0.0,HOME,"""04-01""",Runs,CIN,"Frederick, MD, USA",5/25/1995,12.80%,26.1 days,Waning Crescent,wane,0,0.5,0.5,Win
+brett-baty,0.5,O +800 | U -2000,Under,0.0,0.0,AWAY,"""04-01""",Runs,NYM,"Round Rock, TX, USA",11/13/1999,22.90%,4.7 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+bryan-de-la-cruz,0.5,O +875 | U -1600,Under,0.0,0.0,AWAY,"""04-01""",Runs,ATL,"Santo Domingo Este,Dominican Republic",12/16/1996,39.10%,6.3 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+kyle-isbel,0.5,O +1150 | U -2500,Under,0.0,0.0,AWAY,"""04-01""",Runs,KC,"Fontana, CA, USA",3/3/1997,36.90%,23.4 days,Waning Crescent,wane,0,0.5,0.5,Win
+xander-bogaerts,0.5,O +750 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"Oranjestad,Aruba",10/1/1992,33.40%,5.8 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+gavin-lux,0.5,O +700 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,CIN,"Kenosha, WI, USA",11/23/1997,35.60%,23.5 days,Waning Crescent,wane,0,0.5,0.5,Win
+jake-mccarthy,0.5,O +1450 | U -5000,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Scranton, PA, USA",7/30/1997,13.70%,26.0 days,Waning Crescent,wane,0,0.5,0.5,Win
+danny-jansen,0.5,O +575 | U -900,Under,0.0,0.0,HOME,"""04-01""",Runs,TB,"Elmhurst, IL, USA",4/15/1995,99.90%,14.5 days,Full Moon,WAX,0,0.5,0.5,Win
+lamonte-wade,0.5,O +600 | U -900,Under,0.0,0.0,AWAY,"""04-01""",Runs,SF,"Baltimore, MD, USA",1/1/1994,86.80%,18.2 days,Waning Gibbous,wane,0,0.5,0.5,Win
+josh-bell,0.5,O +675 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,WSH,"Irving, TX, USA",8/14/1992,99.30%,15.5 days,Waning Gibbous,wane,0,0.5,0.5,Win
+joseph-bart,0.5,O +575 | U -900,Under,0.0,0.0,AWAY,"""04-01""",Runs,PIT,"Buford, GA, USA",12/15/1996,28.10%,5.2 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+ozhaino-albies,0.5,O +700 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,ATL,"Willemstad,Curacao",1/7/1997,3.60%,27.8 days,Waning Crescent,wane,0,0.5,0.5,Win
+tyler-soderstrom,0.5,O +800 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,ATH,"Turlock, CA, USA",11/24/2001,60.70%,8.4 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+graham-pauley,0.5,O +800 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,MIA,"Alpharetta, GA, USA",9/24/2000,13.30%,26.0 days,Waning Crescent,wane,0,0.5,0.5,Win
+tommy-pham,0.5,O +600 | U -900,Under,0.0,0.0,AWAY,"""04-01""",Runs,PIT,"Las Vegas, NV, USA",3/8/1988,79.40%,19.2 days,Waning Gibbous,wane,0,0.5,0.5,Win
+jacob-meyers,0.5,O +1300 | U -3003,Under,0.0,0.0,HOME,"""04-01""",Runs,HOU,"Omaha, NE, USA",6/18/1996,7.30%,2.5 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+nick-fortes,0.5,O +1400 | U -5000,Under,0.0,0.0,HOME,"""04-01""",Runs,MIA,"Miami, FL, USA",11/11/1996,0.50%,0.6 days,New Moon,wane,0,0.5,0.5,Win
+miguel-andujar,0.5,O +800 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,ATH,"San Cristobal,Dominican Republic",3/2/1995,1.80%,1.2 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+luis-arraez,0.5,O +1550 | U -10000,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"San Felipe,Venezuela",4/9/1997,7.30%,2.6 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+taylor-walls,0.5,O +875 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,TB,"Cordele, GA, USA",7/10/1996,22.90%,24.9 days,Waning Crescent,wane,0,0.5,0.5,Win
+steven-kwan,0.5,O +900 | U -2000,Under,0.0,0.0,AWAY,"""04-01""",Runs,CLE,"Los Gatos, CA, USA",9/5/1997,7.60%,2.6 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+jp-crawford,0.5,O +800 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,SEA,"Long Beach, CA, USA",1/11/1995,72.80%,9.6 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+brayan-rocchio,0.5,O +1550 | U -5000,Under,0.0,0.0,AWAY,"""04-01""",Runs,CLE,"Caracas,Venezuela",1/13/2001,82.90%,18.8 days,Waning Gibbous,wane,0,0.5,0.5,Win
+nico-hoerner,0.5,O +1600 | U -10000,Under,0.0,0.0,AWAY,"""04-01""",Runs,CHC,"Oakland, CA, USA",5/13/1997,37.00%,6.1 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+ernie-clement,0.5,O +900 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,TOR,"Rochester, NY, USA",3/22/1996,13.00%,3.5 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+sal-frelick,0.5,O +1400 | U -5000,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Boston, MA, USA",4/19/2000,99.60%,15.2 days,Waning Gibbous,wane,0,0.5,0.5,Win
+kebryan-hayes,0.5,O +900 | U -1600,Under,0.0,0.0,AWAY,"""04-01""",Runs,PIT,"Tomball, TX, USA",1/28/1997,80.90%,19.0 days,Waning Gibbous,wane,0,0.5,0.5,Win
+isiah-kiner-falefa,0.5,O +1450 | U -5000,Under,0.0,0.0,AWAY,"""04-01""",Runs,PIT,"Honolulu, HI, USA",3/23/1995,51.90%,22.0 days,Last Quarter,wane,0,0.5,0.5,Win
+matt-wallner,0.5,O +375 | U -500,Under,0.0,0.0,AWAY,"""04-01""",Runs,MIN,"Forest Lake, MN, USA",12/12/1997,95.10%,12.7 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+will-smith-c,0.5,O +600 | U -900,Under,0.0,0.0,HOME,"""04-01""",Runs,LAD,"Louisville, KY, USA",3/28/1995,6.40%,27.2 days,Waning Crescent,wane,0,0.5,0.5,Win
+austin-riley,0.5,O +500 | U -750,Under,0.0,0.0,AWAY,"""04-01""",Runs,ATL,"Memphis, TN, USA",4/2/1997,30.80%,24.0 days,Waning Crescent,wane,0,0.5,0.5,Win
+jo-adell,0.5,O +475 | U -650,Under,0.0,0.0,AWAY,"""04-01""",Runs,LAA,"Shelby, NC, USA",4/8/1999,56.60%,21.5 days,Waning Gibbous,wane,0,0.5,0.5,Win
+jarred-kelenic,0.5,O +700 | U -1200,Under,0.0,0.0,AWAY,"""04-01""",Runs,ATL,"Waukesha, WI, USA",7/16/1999,13.70%,3.5 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+jonathan-india,0.5,O +625 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,KC,"Ft. Lauderdale, FL, USA",12/15/1996,28.20%,5.2 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+luis-robert,0.5,O +475 | U -650,Under,0.0,0.0,HOME,"""04-01""",Runs,CWS,"Guantanamo,Cuba",8/3/1997,0.20%,0.3 days,New Moon,wane,0,0.5,0.5,Win
+vladimir-guerrero-jr,0.5,O +450 | U -625,Under,0.0,0.0,HOME,"""04-01""",Runs,TOR,"Montreal, QC, Canada",3/16/1999,1.80%,28.3 days,Waning Crescent,wane,0,0.5,0.5,Win
+nathaniel-lowe,0.5,O +750 | U -1200,Under,0.0,0.0,AWAY,"""04-01""",Runs,WSH,"Norfolk, VA, USA",7/7/1995,63.10%,8.6 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+spencer-torkelson-if,0.5,O +575 | U -900,Under,0.0,0.0,AWAY,"""04-01""",Runs,DET,"Petaluma, CA, USA",8/26/1999,99.40%,14.1 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+cody-bellinger,0.5,O +600 | U -900,Under,0.0,0.0,HOME,"""04-01""",Runs,NYY,"Scottsdale, AZ, USA",7/13/1995,98.70%,15.8 days,Waning Gibbous,wane,0,0.5,0.5,Win
+elias-diaz,0.5,O +850 | U -1600,Under,0.0,0.0,HOME,"""04-01""",Runs,SD,"Maracaibo,Venezuela",11/17/1990,0.30%,0.3 days,New Moon,wane,0,0.5,0.5,Win
+jj-bleday,0.5,O +575 | U -800,Under,0.0,0.0,HOME,"""04-01""",Runs,ATH,"Danville, PA, USA",11/10/1997,73.30%,9.7 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+jesse-winker,0.5,O +1000 | U -2000,Under,0.0,0.0,AWAY,"""04-01""",Runs,NYM,"Buffalo, NY, USA",8/17/1993,0.20%,29.4 days,New Moon,wane,0,0.5,0.5,Win
+keibert-ruiz,0.5,O +600 | U -900,Under,0.0,0.0,AWAY,"""04-01""",Runs,WSH,"Valencia,Venezuela",7/20/1998,10.80%,26.4 days,Waning Crescent,wane,0,0.5,0.5,Win
+josh-naylor,0.5,O +625 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,ARI,"Mississauga, ON, Canada",6/22/1997,97.00%,16.4 days,Waning Gibbous,wane,0,0.5,0.5,Win
+marcus-semien,0.5,O +525 | U -750,Under,0.0,0.0,AWAY,"""04-01""",Runs,TEX,"San Francisco, CA, USA",9/17/1990,1.70%,28.3 days,Waning Crescent,wane,0,0.5,0.5,Win
+mark-vientos,0.5,O +550 | U -800,Under,0.0,0.0,AWAY,"""04-01""",Runs,NYM,"Norwalk, CT, USA",12/11/1999,12.80%,3.5 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+francisco-lindor,0.5,O +450 | U -650,Under,0.0,0.0,AWAY,"""04-01""",Runs,NYM,"Caguas,Puerto Rico",11/14/1993,1.00%,0.9 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+terry-friedl,0.5,O +775 | U -1401,Under,0.0,0.0,HOME,"""04-01""",Runs,CIN,"Sewickley, PA, USA",8/14/1995,84.70%,18.6 days,Waning Gibbous,wane,0,0.5,0.5,Win
+paul-dejong,0.5,O +675 | U -1100,Under,0.0,0.0,AWAY,"""04-01""",Runs,WSH,"Orlando, FL, USA",8/2/1993,99.80%,14.5 days,Full Moon,WAX,0,0.5,0.5,Win
+jose-adolis-garcia,0.5,O +375 | U -500,Under,0.0,0.0,AWAY,"""04-01""",Runs,TEX,"Ciego de Avila,Cuba",3/2/1993,53.50%,7.7 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+bobby-witt-jr,0.5,O +375 | U -525,Under,0.0,0.0,AWAY,"""04-01""",Runs,KC,"Colleyville, TX, USA",6/14/2000,93.10%,12.3 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+jeimer-candelario,0.5,O +675 | U -1100,Under,0.0,0.0,HOME,"""04-01""",Runs,CIN,"New York, NY, USA",11/24/1993,76.60%,10.0 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+anthony-santander,0.5,O +340 | U -450,Under,0.0,0.0,HOME,"""04-01""",Runs,TOR,"Margarita,Venezuela",10/19/1994,99.90%,14.4 days,Full Moon,WAX,0,0.5,0.5,Win
+alec-burleson,0.5,O +750 | U -1200,Under,0.0,0.0,HOME,"""04-01""",Runs,STL,"Charlotte, NC, USA",11/25/1998,33.40%,5.8 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+mj-melendez,0.5,O +625 | U -1000,Under,0.0,0.0,AWAY,"""04-01""",Runs,KC,"Daytona Beach, FL, USA",11/29/1998,71.90%,9.5 days,Waxing Gibbous,WAX,0,0.5,0.5,Win
+jackson-chourio,0.5,O +525 | U -750,Under,0.0,0.0,HOME,"""04-01""",Runs,MIL,"Maracaibo,Venezuela",3/11/2004,77.30%,19.4 days,Waning Gibbous,wane,0,0.5,0.5,Win
+juan-soto,0.5,O +425 | U -600,Under,0.0,0.0,AWAY,"""04-01""",Runs,NYM,"Santo Domingo,Dominican Republic",10/25/1998,24.80%,4.9 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+matt-chapman,0.5,O +375 | U -500,Under,0.0,0.0,AWAY,"""04-01""",Runs,SF,"Victorville, CA, USA",4/28/1993,33.90%,5.8 days,Waxing Crescent,WAX,0,0.5,0.5,Win
+joc-pederson,0.5,O +375 | U -525,Under,0.0,0.0,AWAY,"""04-01""",Runs,TEX,"Palo Alto, CA, USA",4/21/1992,80.70%,19.0 days,Waning Gibbous,wane,0,0.5,0.5,Win
+willy-adames,0.5,O +375 | U -525,Under,0.0,0.0,AWAY,"""04-01""",Runs,SF,"Santiago,Dominican Republic",9/2/1995,45.00%,6.9 days,First Quarter,WAX,0,0.5,0.5,Win
+corey-seager,0.5,O +333 | U -450,Under,0.0,0.0,AWAY,"""04-01""",Runs,TEX,"Charlotte, NC, USA",4/27/1994,96.70%,16.5 days,Waning Gibbous,wane,0,0.5,0.5,Win

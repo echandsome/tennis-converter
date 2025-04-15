@@ -1,0 +1,5 @@
+I need to add the date (mm-yy) to column P
+
+I did the 1st 5 groups for example
+
+Use the Column A date
