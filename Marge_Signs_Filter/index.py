@@ -38,46 +38,23 @@ def step1_signs_points_lineup(csv_file, ref_file):
     ws.append(["Partner A", "", "Partner B", ""] + [""] * 7 + ["Signs", "Symbol"])
     
     ref_col_indices = [53, 64, 54, 69, 62, 73, 74, 75, 65, 67, 68]
-    t_temp_player = []
-    temp_data = []
+    
+    ref_row_num = 2
+    
     for _, row in df.iterrows():
         if pd.notna(row[0]) and pd.notna(row[2]):
-            if t_temp_player and temp_data:
-                for players in t_temp_player:
-                    for player in players:
-                        ws.append(player)
-                    for data in temp_data:
-                        ws.append(data)
-                t_temp_player = []
-                temp_data = []
-
             dob_converted = convert_date(row[2]) if pd.notna(row[2]) else None
-            temp_row = []
+            ws.append([row[0], row[1], row[2], row[3]] + [""] * 7)
             if dob_converted:
-                for ref_row in ref_ws.iter_rows(min_row=2, max_row=ref_ws.max_row, min_col=64, max_col=64):
-                    if str(ref_row[0].value).strip() == dob_converted:
-                        temp_row.append(ref_row)
-
-            for ref_row in temp_row:
-                temp_player = []
-                temp_player.append([row[0], row[1], row[2], row[3]] + [""] * 7)     
-                extracted_data = [ref_ws.cell(row=ref_row[0].row, column=col).value for col in ref_col_indices]
-                temp_player.append(extracted_data)
-                t_temp_player.append(temp_player)
-            
-            
+                if ref_row_num <= ref_ws.max_row:
+                    extracted_data = [
+                        ref_ws.cell(row=ref_row_num, column=col).value for col in ref_col_indices
+                    ]
+                    ws.append(extracted_data)
+                    ref_row_num += 1
         elif pd.notna(row[4]):
-            temp_data.append([""] * 11 + [row[4], row[5]])
+            ws.append([""] * 11 + [row[4], row[5]])
     
-    if t_temp_player and temp_data:
-        for players in t_temp_player:
-            for player in players:
-                ws.append(player)
-            for data in temp_data:
-                ws.append(data)
-        t_temp_player = []
-        temp_data = []
-
     wb.save(output_path)
     step2_filter_fl(output_path, ref_file)
     print("Success", "Step1 file saved successfully!")
