@@ -1,0 +1,38 @@
+I need an imbalance script.
+
+It needs parameters I can set for testing
+
+
+1. MAXIMUM dates/rows to look back
+*enter a number like 5 or 7 etc
+
+
+
+2. Minimum off set of daily differences
+
+if 3 minimum is set for example, it will look for a (combined dates) DAILY difference of 3 or higher
+
+*enter a number like 5 or 7 etc
+
+This means it will only include results like these
+
+Mars_Neptune-BLK_Balls
+Mars_Node-BLK_Balls
+
+that have a score of +3 or more
+
+
+I need to generate a report and be able to run the report against a daily file to get a count
+
+
+
+The script will create a count for each player using Column N of the daily input file.
+
+
+
+
+
+
+
+
+

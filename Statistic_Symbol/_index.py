@@ -2,19 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 from openpyxl import load_workbook
-
-def get_column_n_values_by_name(daily_path, name):
-    wb = load_workbook(daily_path, data_only=True)
-    ws = wb.active
-
-    results = []
-    for row in ws.iter_rows(min_row=1):  # Iterate through all rows
-        a_cell = row[0]  # Column A (index 0)
-        if a_cell.value == name:
-            n_cell = row[13]  # Column N (index 13)
-            results.append(n_cell.value)
-
-    return results
+import re
 
 def get_filtered_rows(historical_path, symbol, count):
     wb = load_workbook(historical_path, data_only=True)
@@ -32,12 +20,7 @@ def get_filtered_rows(historical_path, symbol, count):
         if found:
             if all(cell.value is None for cell in row):
                 break  # Stop when reaching an empty row
-
-            try:
-                match_rows.append(row)
-            except Exception as e:
-                print(f"Error parsing row {i}: {e}")
-                continue
+            match_rows.append(row)
 
         elif b_cell.value == symbol:
             found = True  # Start from the matched symbol
@@ -45,7 +28,7 @@ def get_filtered_rows(historical_path, symbol, count):
     for i in reversed(range(len(match_rows))):
         row = match_rows[i]
 
-        b_val = row[1].value  # Column B (duplicate with symbol, can be omitted)
+        b_val = row[1].value  # Column B
         c_val = row[2].value  # Column C
 
         if isinstance(b_val, (int, float)):
@@ -60,30 +43,40 @@ def get_filtered_rows(historical_path, symbol, count):
 
     return c_count
 
-def process_daily_format(daily_format_path, daily_path_path, historical_path, count_val):
-    wb = load_workbook(daily_format_path)
+def process_daily_file(daily_path, historical_path, count_val):
+    wb = load_workbook(daily_path)
     ws = wb.active
-
+    total = 0
+    start = False
     for i, row in enumerate(ws.iter_rows(min_row=1), start=1):
         a_value = row[0].value  # Column A
-        symbols = get_column_n_values_by_name(daily_path_path, a_value)
-        
-        t_count = 0
-        for symbol in symbols:
-            t_count += get_filtered_rows(historical_path, symbol, count_val)
+        n_value = row[13].value  # Column N
 
-        print(f"Row {i} - t_count: {t_count}")
-        row[8].value = t_count  # I column (index 8)
+        pattern = r"^\(\d{1,2}_[A-Za-z]{1,10}_\d{4}\)$"
+        if isinstance(a_value, str) and re.match(pattern, a_value.strip()):
+            start = True
 
-    out_path = os.path.join(os.path.dirname(daily_format_path), "Modified_Daily_Format.xlsx")
+        if not a_value or a_value == "":
+            row[10].value = total
+            total = 0
+            start = False
+            continue
+
+        if start == False or not a_value or not n_value:
+            continue
+
+        t_count = get_filtered_rows(historical_path, n_value, count_val)
+        row[10].value = t_count  # Column K (index 10)
+        total += t_count
+
+        print(f"Row {i} ({a_value}) - Symbol: {n_value} - t_count: {t_count}")
+
+    out_path = os.path.join(os.path.dirname(daily_path), "Modified_Daily.xlsx")
     wb.save(out_path)
 
     result_label.config(text=f"Completed!\nSaved to {out_path}", fg="green")
 
-def browse_daily_format():
-    path = filedialog.askopenfilename(title="Select Daily_Format.xlsx", filetypes=[("Excel files", "*.xlsx")])
-    if path:
-        daily_format_path_var.set(path)
+# --- GUI SETUP ---
 
 def browse_daily():
     path = filedialog.askopenfilename(title="Select Daily.xlsx", filetypes=[("Excel files", "*.xlsx")])
@@ -96,12 +89,11 @@ def browse_historical():
         historical_path_var.set(path)
 
 def run_conversion():
-    daily_format_path = daily_format_path_var.get()
-    daily_path_path = daily_path_var.get()
+    daily_path = daily_path_var.get()
     historical_path = historical_path_var.get()
     count_val = count_entry.get()
 
-    if not daily_format_path or not daily_path_path or not historical_path or not count_val:
+    if not daily_path or not historical_path or not count_val:
         result_label.config(text="Please select all files and input a count value.", fg="red")
         return
 
@@ -109,22 +101,17 @@ def run_conversion():
     root.update()
 
     try:
-        process_daily_format(daily_format_path, daily_path_path, historical_path, count_val)
+        process_daily_file(daily_path, historical_path, count_val)
     except Exception as e:
         print(e)
         result_label.config(text=f"Error: {str(e)}", fg="red")
 
-# --- GUI SETUP ---
 root = tk.Tk()
-root.title("Daily Format Processor")
-root.geometry("600x400")
+root.title("Daily.xlsx Processor")
+root.geometry("600x300")
 
-daily_format_path_var = tk.StringVar()
 daily_path_var = tk.StringVar()
 historical_path_var = tk.StringVar()
-
-tk.Button(root, text="Select Daily_Format.xlsx", command=browse_daily_format).pack(pady=(10, 0))
-tk.Label(root, textvariable=daily_format_path_var, wraplength=580).pack()
 
 tk.Button(root, text="Select Daily.xlsx", command=browse_daily).pack(pady=(10, 0))
 tk.Label(root, textvariable=daily_path_var, wraplength=580).pack()
