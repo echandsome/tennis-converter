@@ -28,7 +28,7 @@ def process_tennis_statistics(file_path):
 
     # Generate block-stacked DataFrame
     final_rows = []
-    final_rows.append(["", "Win/Over Count", "Win/Over Count", "Total Win/Lose", "Win/Over %"])
+    final_rows.append(["", "Win/Over Count", "Lose/Under Count", "Total Win/Lose", "Win/Over %"])
     for name in sorted(result.keys()):
         # Header rows
         final_rows.append(["", name, name, name, name])
