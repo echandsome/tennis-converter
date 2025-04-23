@@ -13,6 +13,7 @@ def process_files(daily_path, historical_path, col_choice):
             daily_df[col] = ""
 
     group_start = None
+    group_data = None
 
     for i in range(len(daily_df)):
         cell = daily_df.iat[i, 0]
@@ -49,11 +50,21 @@ def process_files(daily_path, historical_path, col_choice):
                 daily_df.iat[i, 5] = under_total
                 daily_df.iat[i, 6] = percent_all
 
+                if group_data:
+                    daily_df.iat[i, 7] = group_data[4]
+
+                group_data = None
                 group_start = None
         else:
             # Group header
             if isinstance(cell, str) and cell.startswith("(") and cell.endswith(")"):
                 group_start = i
+                if i + 1 < len(daily_df):
+                    
+                    group_data = daily_df.iloc[i + 1, 14:18].tolist()  # O~R 열 from the next row
+                else:
+                    group_data = ["", "", "", ""]
+                group_data.append(daily_df.iat[i + 1, 7])
 
     # Handle last group if missing trailing empty row
     if group_start is not None:
@@ -87,6 +98,13 @@ def process_files(daily_path, historical_path, col_choice):
         daily_df.iat[i, 4] = over_total
         daily_df.iat[i, 5] = under_total
         daily_df.iat[len(daily_df) - 1, 6] = percent_all
+
+        if group_data:
+            daily_df.iat[i, 7] = group_data[4]
+            daily_df.iat[i, 14] = group_data[0]
+            daily_df.iat[i, 15] = group_data[1]
+            daily_df.iat[i, 16] = group_data[2]
+            daily_df.iat[i, 17] = group_data[3]
 
     # Save result
     output_path = os.path.join(os.path.dirname(daily_path), "Daily_with_stats.xlsx")

@@ -88,10 +88,10 @@ def Step1_Tennis_Matches_Daily_Present_into_Astro(input_path):
         location = row.iloc[3] if not pd.isna(row.iloc[3]) else ''
         # O~R columns (index 14~17)
         extra_cols = [
-            int(row.iloc[14]) if not pd.isna(row.iloc[14]) else '',
-            row.iloc[15] if not pd.isna(row.iloc[15]) else '',
-            int(row.iloc[16]) if not pd.isna(row.iloc[16]) else '',
-            row.iloc[17] if not pd.isna(row.iloc[17]) else ''
+            int(row.iloc[14]) if not pd.isna(row.iloc[14]) else '01',
+            row.iloc[15] if not pd.isna(row.iloc[15]) else 'Jan',
+            int(row.iloc[16]) if not pd.isna(row.iloc[16]) else '2001',
+            row.iloc[17] if not pd.isna(row.iloc[17]) else 'Moscow, Russia'
         ]
 
         row_data = date_parts + [location] + [''] * 3 + extra_cols

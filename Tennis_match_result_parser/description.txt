@@ -1,0 +1,26 @@
+I need a script to add the W and L for Win and Loss in column S
+
+I need it to calculate the Sets in columns E-K
+
+you cant just add them up as its wrong some times
+
+it need to add each set separately and find the higher number of winning sets
+
+like 1 out of 1, 2 out of 2, 2 out of 3, 3 out of 4, 3 out of 5
+9
+
+its like the best of winning sets
+
+(its not always the bottom player that wins)
+
+the winner always has won more sets, but not always more points when all seta are added up together
+
+the winner always has won more sets, but not always more points when all seta are added up together
+
+row 5444 and 5445 are a good example
+
+the winning player had 16 points and the losing player had 18 points
+
+BUT the winning player had 2 winning sets hence the higher number in 
+
+so the script just needs to tally who has the highest number in each set most often and count them as the winner

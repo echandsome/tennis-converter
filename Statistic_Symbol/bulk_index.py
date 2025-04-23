@@ -7,10 +7,14 @@ from collections import defaultdict
 def get_column_n_values_by_name(daily_path, name):
     wb = load_workbook(daily_path, data_only=True)
     ws = wb.active
+
     results = []
-    for row in ws.iter_rows(min_row=1):
-        if row[0].value == name:
-            results.append(row[13].value)  # Column N
+    for row in ws.iter_rows(min_row=1):  # Iterate through all rows
+        a_cell = row[0]  # Column A (index 0)
+        if a_cell.value == name:
+            n_cell = row[13]  # Column N (index 13)
+            results.append(n_cell.value)
+
     return results
 
 def get_filtered_rows(historical_path, symbol, count):
@@ -24,20 +28,33 @@ def get_filtered_rows(historical_path, symbol, count):
     c_count = 0
 
     for i, row in enumerate(ws.iter_rows(min_row=1), start=1):
+        b_cell = row[1]  # Column B
+
         if found:
             if all(cell.value is None for cell in row):
-                break
-            match_rows.append(row)
-        elif row[1].value == symbol:
-            found = True
+                break  # Stop when reaching an empty row
 
-    for row in reversed(match_rows):
-        b_val = row[1].value
-        c_val = row[2].value
+            try:
+                match_rows.append(row)
+            except Exception as e:
+                print(f"Error parsing row {i}: {e}")
+                continue
+
+        elif b_cell.value == symbol:
+            found = True  # Start from the matched symbol
+
+    for i in reversed(range(len(match_rows))):
+        row = match_rows[i]
+
+        b_val = row[1].value  # Column B (duplicate with symbol, can be omitted)
+        c_val = row[2].value  # Column C
+
         if isinstance(b_val, (int, float)):
             c_count += b_val
+
         if isinstance(c_val, (int, float)):
             c_count -= c_val
+
         data_collected += 1
         if data_collected >= max_count:
             break
@@ -49,18 +66,23 @@ def process_daily_format(daily_format_path, daily_path, historical_path, count_v
     ws = wb.active
 
     for i, row in enumerate(ws.iter_rows(min_row=1), start=1):
-        a_value = row[0].value
+        a_value = row[0].value  # Column A
         symbols = get_column_n_values_by_name(daily_path, a_value)
+        
         t_count = 0
         for symbol in symbols:
             temp_count = get_filtered_rows(historical_path, symbol, count_val)
-            if start_val is not None and end_val is not None:
+            if start_val and end_val:
+                # Check if temp_count is within positive range (start_val to end_val)
+                # or negative range (-start_val to -end_val)
                 if (start_val <= temp_count <= end_val) or (-end_val <= temp_count <= -start_val):
                     t_count += temp_count
             else:
                 t_count += temp_count
-        row[8].value = t_count
+
+
         print(f"Row {i} - t_count: {t_count}")
+        row[8].value = t_count  # I column (index 8)
     
     os.makedirs(output_dir, exist_ok=True)
     out_file = os.path.join(output_dir, f"{prefix}Modified_Daily_Format.xlsx")
@@ -99,10 +121,12 @@ def run_batch_process():
 
     common_prefixes = set(fmt_files.keys()) & set(daily_files.keys()) & set(historical_files.keys())
     success = 0
-    for prefix in common_prefixes:
+    for prefix in sorted(common_prefixes):
         print(prefix)
         try:
             output_dir = os.path.join(os.path.dirname(d_fmt_dir), "Output")
+
+            print(f"{fmt_files[prefix]} - {daily_files[prefix]} - {historical_files[prefix]}")
             process_daily_format(
                 fmt_files[prefix], daily_files[prefix], historical_files[prefix],
                 count_val, start_val, end_val,
