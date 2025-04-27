@@ -1,0 +1,72 @@
+The job is to split files by date like this
+
+
+Enter a number between 1-100
+
+If I enter 5, it will take one file and split like this
+
+It will always look in Column P (Date)
+
+
+File 1
+(04-25)
+(04-24)
+(04-23)
+(04-22)
+(04-21)
+
+
+File 2
+(04-24)
+(04-23)
+(04-22)
+(04-21)
+(04-20)
+
+File 3
+(04-23)
+(04-22)
+(04-21)
+(04-20)
+(04-19)
+
+
+
+*Last 5 dates, BUT they may not always be sequential. It might look like this
+
+
+File 4
+(04-22)
+(04-15)
+(04-12)
+(04-07)
+(04-06)
+
+
+**Name each file with the date range like this 
+
+File_001_0421_0425
+File_002_0420_0424
+File_001_0419_0423
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
