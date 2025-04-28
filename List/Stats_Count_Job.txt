@@ -1,0 +1,8 @@
+Simply summarize the counts with %
+
+1. Column A is 50 rows per number no matter what. It will have blank row results and thats okay. I need the format to lineup multiple files manually
+
+2. Add the OVER 
+   Add the UNDER
+   Show Total
+   Show the OVER %
