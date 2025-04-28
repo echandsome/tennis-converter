@@ -34,7 +34,7 @@ def auto_adjust_columns_width(out_path):
 
     wb.save(out_path)
 
-def process_combined_output(comparison_path, daily_path):
+def process_combined_output(comparison_path, daily_path, group_option):
     # Load the comparison and daily data Excel files
     comp_df = pd.read_excel(comparison_path)
     daily_df = pd.read_excel(daily_path)
@@ -42,16 +42,35 @@ def process_combined_output(comparison_path, daily_path):
     output_rows = []
 
     for idx, row in comp_df.iterrows():
-        player_a = str(row[0]).strip()
-        player_b = str(row[1]).strip()
+        player_a = str(row.iloc[0]).strip()
+        player_b = str(row.iloc[1]).strip()
+        additional_match = str(row.iloc[2]).strip()
 
         comp_values = row.tolist()
 
-        # Search for player A's info
-        daily_a = daily_df[daily_df.iloc[:, 0].astype(str).str.strip() == player_a]
+        # Determine group keys
+        if group_option == 'L':
+            # Search for player A's info
+            daily_a = daily_df[(daily_df.iloc[:, 0].astype(str).str.strip() == player_a) &
+                (daily_df.iloc[:, 11].astype(str).str.strip() == additional_match)   ]
 
-        # Search for player B's info
-        daily_b = daily_df[daily_df.iloc[:, 0].astype(str).str.strip() == player_b]
+            # Search for player B's info
+            daily_b = daily_df[(daily_df.iloc[:, 0].astype(str).str.strip() == player_b) &
+                (daily_df.iloc[:, 11].astype(str).str.strip() == additional_match)]
+        elif group_option == 'N':
+             # Search for player A's info
+            daily_a = daily_df[(daily_df.iloc[:, 0].astype(str).str.strip() == player_a) &
+                (daily_df.iloc[:, 13].astype(str).str.strip() == additional_match)   ]
+
+            # Search for player B's info
+            daily_b = daily_df[(daily_df.iloc[:, 0].astype(str).str.strip() == player_b) &
+                (daily_df.iloc[:, 13].astype(str).str.strip() == additional_match)]
+        else:
+            # Search for player A's info
+            daily_a = daily_df[daily_df.iloc[:, 0].astype(str).str.strip() == player_a]
+
+            # Search for player B's info
+            daily_b = daily_df[daily_df.iloc[:, 0].astype(str).str.strip() == player_b]
 
         if daily_a.empty or daily_b.empty:
             continue
@@ -82,35 +101,47 @@ def process_combined_output(comparison_path, daily_path):
 
     auto_adjust_columns_width(out_path)
 
-    process_grouped_output(out_path)
+    process_grouped_output(out_path, group_option)
 
-def process_grouped_output(input_path):
+def process_grouped_output(input_path, group_option):
     df = pd.read_excel(input_path)
 
-    output_header = [
+    # Determine if columns are offset (N or L implies one extra column at front)
+    offset = 1 if group_option in ['N', 'L'] else 0
+
+    # Adjusted output header
+    base_header = [
         "", "Player Count", "Total", "", "", "", "", "", "", "",
         "Player", "FILL", "", "", "", "", "",                           
         "FILL", "", "",  "",                                          
         "FILL", "FILL", "FILL",                           
         "", "", "" , ""                                   
     ]
+    output_header = [""] * offset + base_header  # prepend empty string if offset
+
+    # Determine group keys based on option
+    if group_option in ['L', 'N']:
+        group_keys = [df.iloc[:, 11 + offset], df.iloc[:, 2]]
+    else:
+        group_keys = [df.iloc[:, 10]]
 
     output_rows = []
 
-    grouped = df.groupby(df.iloc[:, 10])
-
+    grouped = df.groupby(group_keys)
+    
     for _, group_df in grouped:
+        
         modified_group = group_df.copy()
 
-        modified_group.iloc[:, 12:17] = ''
-        modified_group.iloc[:, 18:21] = ''
+        modified_group.iloc[:, 12 + offset:17 + offset] = ''
+        modified_group.iloc[:, 18 + offset:21 + offset] = ''
 
         summary_row = pd.Series([''] * df.shape[1], index=df.columns)
-        summary_row.iloc[1] = len(group_df)              
-        summary_row.iloc[2] = group_df.iloc[:, 2].sum()
+        summary_row.iloc[1 + offset] = len(group_df)              
+        summary_row.iloc[2 + offset] = group_df.iloc[:, 2 + offset].sum()
 
         for idx in [10, 11, 17, 21, 22, 23]:
-            summary_row.iloc[idx] = group_df.iloc[0, idx]
+            summary_row.iloc[idx + offset] = group_df.iloc[0, idx + offset]
 
         output_rows.append(modified_group)
         output_rows.append(pd.DataFrame([summary_row]))
@@ -142,29 +173,38 @@ def browse_daily():
 def run_combination():
     comparison_path = comparison_path_var.get()
     daily_path = daily_path_var.get()
+    group_option = group_option_var.get()
     if not comparison_path or not daily_path:
         result_label.config(text="Please select both files.", fg="red")
         return
     result_label.config(text="Processing...", fg="blue")
     root.update()
     try:
-        process_combined_output(comparison_path, daily_path)
+        process_combined_output(comparison_path, daily_path, group_option)
     except Exception as e:
+        print(e)
         result_label.config(text=f"Error: {str(e)}", fg="red")
 
 # GUI Setup
 root = tk.Tk()
 root.title("Player Comparison Merger (.xlsx output)")
-root.geometry("500x250")
+root.geometry("500x300")
 
 comparison_path_var = tk.StringVar()
 daily_path_var = tk.StringVar()
+group_option_var = tk.StringVar(value="None")
 
 tk.Button(root, text="Select Comparison File", command=browse_comparison).pack(pady=(10, 0))
 tk.Label(root, textvariable=comparison_path_var, wraplength=480).pack()
 
 tk.Button(root, text="Select Daily File", command=browse_daily).pack(pady=(10, 0))
 tk.Label(root, textvariable=daily_path_var, wraplength=480).pack()
+
+# Group Option Radio Buttons
+group_frame = tk.LabelFrame(root, text="Group By")
+group_frame.pack(pady=10)
+for text in ["None", "L", "N"]:
+    tk.Radiobutton(group_frame, text=text, variable=group_option_var, value=text).pack(side="left", padx=10)
 
 tk.Button(root, text="Run Matcher", command=run_combination, bg="green", fg="white").pack(pady=20)
 
