@@ -62,7 +62,10 @@ def process_files(daily_path, historical_path, col_choice):
                 daily_df.iat[i, 6] = percent_all
 
                 if group_data:
-                    daily_df.iat[i, 7] = group_data[4]
+                    daily_df.iat[i, 0] = group_data[0]
+                    daily_df.iat[i, 1] = group_data[1]
+                    daily_df.iat[i, 7] = group_data[6]
+                    daily_df.iat[i, 15] = group_data[3]
 
                 group_data = None
                 group_start = None            
@@ -71,10 +74,9 @@ def process_files(daily_path, historical_path, col_choice):
             if isinstance(cell, str) and cell.startswith("(") and cell.endswith(")"):
                 group_start = i
                 if i + 1 < len(daily_df):
-                    
-                    group_data = daily_df.iloc[i + 1, 14:18].tolist()  # O~R from the next row
+                    group_data = daily_df.iloc[i + 1, list(range(0, 2)) + list(range(14, 18))].tolist()
                 else:
-                    group_data = ["", "", "", ""]
+                    group_data = ["", "", "", "", "", ""]
                 group_data.append(daily_df.iat[i + 1, 7])
 
         i += 1
