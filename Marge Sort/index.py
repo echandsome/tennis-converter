@@ -2,26 +2,21 @@ import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
 import os
-import openpyxl
 
-def shorten_and_sort(file_path):
+def shorten_columns(file_path, file_prefix):
     df = pd.read_excel(file_path)
 
-    # Rename headers
+    # Rename headers with file-specific prefix
     rename_map = {
-        df.columns[0]: "A",
-        df.columns[1]: "B",
-        "Over": "O",
-        "Under": "U",
-        "Total": "Total",
-        "OVER% (c/e)": "O% (c/e)"
+        df.columns[0]: f"{file_prefix}_A",
+        df.columns[1]: f"{file_prefix}_B",
+        "Over": f"{file_prefix}_O",
+        "Under": f"{file_prefix}_U",
+        "Total": f"{file_prefix}_Total",
+        "OVER% (c/e)": f"{file_prefix}_O% (c/e)"
     }
-    df = df.rename(columns=rename_map)
 
-    # Sort by 'O% (c/e)' in descending order
-    if "O% (c/e)" in df.columns:
-        df = df.sort_values(by="O% (c/e)", ascending=False)
-    
+    df = df.rename(columns=rename_map)
     return df
 
 def merge_files_columnwise(folder_path):
@@ -33,16 +28,23 @@ def merge_files_columnwise(folder_path):
 
     for idx, file in enumerate(all_files):
         file_path = os.path.join(folder_path, file)
-        sorted_df = shorten_and_sort(file_path)
+        file_prefix = f"F{idx+1}"  # Or use os.path.splitext(file)[0] for filename-based prefix
+
+        df = shorten_columns(file_path, file_prefix)
+        df = df.reset_index(drop=True)
 
         if idx > 0:
-            # Add an empty column as separator
-            merged_df = pd.concat([merged_df, pd.DataFrame({f"": [""] * max(len(merged_df), len(sorted_df))})], axis=1)
+            # Add empty column as separator
+            merged_df = pd.concat([merged_df, pd.DataFrame({f"": [""] * max(len(merged_df), len(df))})], axis=1)
 
-        # Reset index to handle merging column-wise
-        sorted_df = sorted_df.reset_index(drop=True)
-        merged_df = pd.concat([merged_df, sorted_df], axis=1)
+        merged_df = pd.concat([merged_df, df], axis=1)
 
+    # Sort by the first file's A and B columns
+    sort_cols = [col for col in merged_df.columns if col.endswith("_A") or col.endswith("_B")]
+    if len(sort_cols) >= 2:
+        merged_df = merged_df.sort_values(by=sort_cols[:2], ascending=True, ignore_index=True)
+
+    # Save output
     parent_dir = os.path.dirname(folder_path)
     output_path = os.path.join(parent_dir, "merged_sorted_output.xlsx")
     merged_df.to_excel(output_path, index=False)
