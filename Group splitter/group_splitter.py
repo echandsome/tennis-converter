@@ -12,11 +12,16 @@ def split_by_dates(file_path, num_dates, output_text):
             output_text.insert(tk.END, "Error: Not enough columns in the file!\n")
             return
 
-        # Get the 16th column, remove parentheses, and convert to MM-DD format
+        # Get the 16th column, remove parentheses, and try to convert to MM-DD-YYYY format first
         date_series = df.iloc[:, 15].astype(str).str.replace(r'[()]', '', regex=True)
-        df['DATE_COL'] = pd.to_datetime(date_series, format='%m-%d', errors='coerce')
 
-        # Remove rows without dates
+        # First, try to parse MM-DD-YYYY format
+        df['DATE_COL'] = pd.to_datetime(date_series, format='%m-%d-%Y', errors='coerce')
+
+        # If there are NaT values (failed parsing), try parsing MM-DD format
+        df['DATE_COL'] = df['DATE_COL'].fillna(pd.to_datetime(date_series, format='%m-%d', errors='coerce'))
+
+        # Remove rows without valid dates
         df = df.dropna(subset=['DATE_COL'])
 
         # Sort dates as MMDD format strings
