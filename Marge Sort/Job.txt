@@ -1,0 +1,8 @@
+1. Merge stats comparison files in order into one file
+
+2. sort every column by the 0% (c/e) so the results rise to the top. I have to currently do this manually in excedl, I have to sort by column F then M then T then AA etc etc each time to get ALL results towards the top
+
+3. Abbreviate the Header so I can shrink columns easier
+Over = O
+Under = U
+Total = T
