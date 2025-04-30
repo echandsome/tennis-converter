@@ -2,22 +2,27 @@ import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
 import os
+import openpyxl
 
-def shorten_columns(file_path, file_prefix):
+def shorten_and_sort(file_path):
     df = pd.read_excel(file_path)
 
-    # Rename headers with file-specific prefix
+    # Rename headers
     rename_map = {
-        "Date": f"{file_prefix}_D",
-        df.columns[1]: f"{file_prefix}_A",
-        df.columns[2]: f"{file_prefix}_B",
-        "Over": f"{file_prefix}_O",
-        "Under": f"{file_prefix}_U",
-        "Total": f"{file_prefix}_Total",
-        "OVER% (c/e)": f"{file_prefix}_O% (c/e)"
+        "Date": "Date",
+        df.columns[1]: "A",
+        df.columns[2]: "B",
+        "Over": "O",
+        "Under": "U",
+        "Total": "Total",
+        "OVER% (c/e)": "O% (c/e)"
     }
-
     df = df.rename(columns=rename_map)
+
+    # Sort by 'O% (c/e)' in descending order
+    if "O% (c/e)" in df.columns:
+        df = df.sort_values(by="O% (c/e)", ascending=False)
+    
     return df
 
 def merge_files_columnwise(folder_path):
@@ -29,28 +34,16 @@ def merge_files_columnwise(folder_path):
 
     for idx, file in enumerate(all_files):
         file_path = os.path.join(folder_path, file)
-        file_prefix = f"F{idx+1}"  # Or use os.path.splitext(file)[0] for filename-based prefix
-
-        df = shorten_columns(file_path, file_prefix)
-        df = df.reset_index(drop=True)
+        sorted_df = shorten_and_sort(file_path)
 
         if idx > 0:
-            # Add empty column as separator
-            merged_df = pd.concat([merged_df, pd.DataFrame({f"": [""] * max(len(merged_df), len(df))})], axis=1)
+            # Add an empty column as separator
+            merged_df = pd.concat([merged_df, pd.DataFrame({f"": [""] * max(len(merged_df), len(sorted_df))})], axis=1)
 
-        merged_df = pd.concat([merged_df, df], axis=1)
+        # Reset index to handle merging column-wise
+        sorted_df = sorted_df.reset_index(drop=True)
+        merged_df = pd.concat([merged_df, sorted_df], axis=1)
 
-    file_count = len(all_files)
-    positions = []
-    current = 6
-    for _ in range(file_count):
-        positions.append(current)
-        current += 8
-
-    for i in positions:
-        merged_df = merged_df.sort_values(by=merged_df.columns[i], ascending=False)
-
-    # Save output
     parent_dir = os.path.dirname(folder_path)
     output_path = os.path.join(parent_dir, "merged_sorted_output.xlsx")
     merged_df.to_excel(output_path, index=False)
