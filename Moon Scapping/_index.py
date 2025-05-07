@@ -55,8 +55,12 @@ def scrape_moon_data(yyyymm_list):
                             parts = list(major.stripped_strings)
                             if len(parts) >= 1:
                                 phase = parts[0].lower()
-                                if "moon" in phase:
+                                if "moon" in phase and "full" in phase:
+                                    phase = 'full moon'
                                     percent = "100%"
+                                if "moon" in phase and "new" in phase:
+                                    phase = 'new moon'
+                                    percent = "0%"
                                 elif "quarter" in phase:
                                     percent = "50%"
                                 else:
