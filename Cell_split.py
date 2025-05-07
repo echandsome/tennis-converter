@@ -11,44 +11,34 @@ def col_letter_to_index(letter):
         total += (string.ascii_uppercase.index(char) + 1) * (26 ** i)
     return total - 1
 
-def clean_column_names(df):
-    # Replace any column name starting with 'Unnamed' with empty values
-    df.columns = [col if not col.startswith('Unnamed') else '' for col in df.columns]
-    return df
-
 def split_file_by_column(file_path, column_letter):
     ext = os.path.splitext(file_path)[1].lower()
     if ext == '.csv':
-        df = pd.read_csv(file_path)
+        df = pd.read_csv(file_path, header=None)
     elif ext in ['.xls', '.xlsx']:
-        df = pd.read_excel(file_path)
+        df = pd.read_excel(file_path, header=None)
     else:
         raise ValueError("Unsupported file type.")
 
     col_index = col_letter_to_index(column_letter)
-    if col_index >= len(df.columns):
+    if col_index >= df.shape[1]:
         raise ValueError("Column letter exceeds available columns in the file.")
-
-    col_name = df.columns[col_index]
 
     # Create outputs folder in same directory
     base_dir = os.path.dirname(file_path)
     output_dir = os.path.join(base_dir, "outputs")
     os.makedirs(output_dir, exist_ok=True)
 
-    grouped = df.groupby(df[col_name])
+    grouped = df.groupby(df[col_index])
 
     for group_name, group_df in grouped:
-        # Clean columns that are 'Unnamed'
-        group_df = clean_column_names(group_df)
-
         safe_name = str(group_name).replace("/", "_").replace("\\", "_")
         output_filename = f"split_{column_letter.upper()}_{safe_name}{ext}"
         output_path = os.path.join(output_dir, output_filename)
         if ext == '.csv':
-            group_df.to_csv(output_path, index=False)
+            group_df.to_csv(output_path, index=False, header=False)
         else:
-            group_df.to_excel(output_path, index=False)
+            group_df.to_excel(output_path, index=False, header=False)
 
     result_label.config(text=f"Split complete!\nFiles saved in 'outputs' folder.", fg="green")
 
