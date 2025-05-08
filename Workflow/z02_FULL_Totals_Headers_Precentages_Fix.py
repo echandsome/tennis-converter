@@ -64,85 +64,105 @@ def process_files():
             t_total = 0
 
             if num_columns == 10:
-                for phase in moon_phases:
-                    matched = df[(df["Symbol Part A"] == symbol) & (df["Phase"] == phase)]
+                # First group by J values
+                for j_value in df[df["Symbol Part A"] == symbol]["J"].unique():
+                    for phase in moon_phases:
+                        matched = df[(df["Symbol Part A"] == symbol) & (df["Phase"] == phase) & (df["J"] == j_value)]
 
-                    # print(matched["J"].values[0])
-                    over_count = matched["C"].sum()
-                    under_count = matched["D"].sum()
-                    total = over_count + under_count
+                        # print(matched["J"].values[0])
+                        over_count = matched["C"].sum()
+                        under_count = matched["D"].sum()
+                        total = over_count + under_count
 
-                    win_over = round(over_count / total, 2) if total > 0 else 0
-                    win_under = round(under_count / total, 2) if total > 0 else 0
+                        win_over = round(over_count / total, 2) if total > 0 else 0
+                        win_under = round(under_count / total, 2) if total > 0 else 0
 
-                    t_over_count += over_count
-                    t_under_count += under_count
-                    t_total += total
+                        t_over_count += over_count
+                        t_under_count += under_count
+                        t_total += total
 
+                        output_rows.append({
+                            "Symbol": "",
+                            "Symbol Part A": symbol,
+                            f"{fc_name}": j_value,
+                            "Phase": phase,
+                            "Over count": over_count,
+                            "Under count": under_count,
+                            "Total": total,
+                            "WIN% OVER": win_over,
+                            "WIN% UNDER": win_under
+                        })
+
+                    # Add summary row for each J value
                     output_rows.append({
-                        "Symbol": "",
-                        "Symbol Part A": symbol,
-                        f"{fc_name}": matched["J"].values[0] if not matched.empty else "",
-                        "Phase": phase,
-                        "Over count": over_count,
-                        "Under count": under_count,
-                        "Total": total,
-                        "WIN% OVER": win_over,
-                        "WIN% UNDER": win_under
+                        "Symbol": f"{symbol}-BLK",
+                        "Symbol Part A": "",
+                        f"{fc_name}": j_value,
+                        "Phase": "",
+                        "Over count": t_over_count,
+                        "Under count": t_under_count,
+                        "Total": t_total,
+                        "WIN% OVER": round(t_over_count / t_total, 2) if t_total > 0 else 0,
+                        "WIN% UNDER": round(t_under_count / t_total, 2) if t_total > 0 else 0
                     })
+                    
+                    # Reset counters for next J value
+                    t_over_count = 0
+                    t_under_count = 0
+                    t_total = 0
 
-                output_rows.append({
-                    "Symbol": f"{symbol}-BLK",
-                    "Symbol Part A": "",
-                    f"{fc_name}": "",
-                    "Phase": "",
-                    "Over count": t_over_count,
-                    "Under count": t_under_count,
-                    "Total": t_total,
-                    "WIN% OVER": round(t_over_count / t_total, 2) if t_total > 0 else 0,
-                    "WIN% UNDER": round(t_under_count / t_total, 2) if t_total > 0 else 0
-                })
-                
             elif num_columns == 11:
-                for phase in moon_phases:
-                    matched = df[(df["Symbol Part A"] == symbol) & (df["Phase"] == phase)]
+                 # First group by J and M values
+                for j_value in df[df["Symbol Part A"] == symbol]["J"].unique():
+                    for m_value in df[(df["Symbol Part A"] == symbol) & (df["J"] == j_value)]["M"].unique():
+                        for phase in moon_phases:
+                            matched = df[(df["Symbol Part A"] == symbol) & 
+                                        (df["Phase"] == phase) & 
+                                        (df["J"] == j_value) & 
+                                        (df["M"] == m_value)]
 
-                    # print(matched["J"].values[0])
-                    over_count = matched["C"].sum()
-                    under_count = matched["D"].sum()
-                    total = over_count + under_count
+                            over_count = matched["C"].sum()
+                            under_count = matched["D"].sum()
+                            total = over_count + under_count
 
-                    win_over = round(over_count / total, 2) if total > 0 else 0
-                    win_under = round(under_count / total, 2) if total > 0 else 0
+                            win_over = round(over_count / total, 2) if total > 0 else 0
+                            win_under = round(under_count / total, 2) if total > 0 else 0
 
-                    t_over_count += over_count
-                    t_under_count += under_count
-                    t_total += total
+                            t_over_count += over_count
+                            t_under_count += under_count
+                            t_total += total
 
-                    output_rows.append({
-                        "Symbol": "",
-                        "Symbol Part A": symbol,
-                        "J": matched["J"].values[0] if not matched.empty else "",
-                        "M": matched["M"].values[0] if not matched.empty else "",
-                        "Phase": phase,
-                        "Over count": over_count,
-                        "Under count": under_count,
-                        "Total": total,
-                        "WIN% OVER": win_over,
-                        "WIN% UNDER": win_under
-                    })
-                output_rows.append({
-                    "Symbol": f"{symbol}-BLK",
-                    "Symbol Part A": "",
-                    "J": "",
-                    "M": "",
-                    "Phase": "",
-                    "Over count": t_over_count,
-                    "Under count": t_under_count,
-                    "Total": t_total,
-                    "WIN% OVER": round(t_over_count / t_total, 2) if t_total > 0 else 0,
-                    "WIN% UNDER": round(t_under_count / t_total, 2) if t_total > 0 else 0
-                })
+                            output_rows.append({
+                                "Symbol": "",
+                                "Symbol Part A": symbol,
+                                "J": j_value,
+                                "M": m_value,
+                                "Phase": phase,
+                                "Over count": over_count,
+                                "Under count": under_count,
+                                "Total": total,
+                                "WIN% OVER": win_over,
+                                "WIN% UNDER": win_under
+                            })
+
+                        # Add summary row for each J and M value combination
+                        output_rows.append({
+                            "Symbol": f"{symbol}-{j_value}-{m_value}",
+                            "Symbol Part A": "",
+                            "J": j_value,
+                            "M": m_value,
+                            "Phase": "",
+                            "Over count": t_over_count,
+                            "Under count": t_under_count,
+                            "Total": t_total,
+                            "WIN% OVER": round(t_over_count / t_total, 2) if t_total > 0 else 0,
+                            "WIN% UNDER": round(t_under_count / t_total, 2) if t_total > 0 else 0
+                        })
+                        
+                        # Reset counters for next combination
+                        t_over_count = 0
+                        t_under_count = 0
+                        t_total = 0
             else :
                 for phase in moon_phases:
                     matched = df[(df["Symbol Part A"] == symbol) & (df["Phase"] == phase)]
