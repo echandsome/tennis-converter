@@ -63,6 +63,7 @@ def process():
     location_file = file1_entry.get()
     stadium_file = file2_entry.get()
     years_back = year_entry.get()
+    output_method_mode = output_mode.get()
 
     save_folder = os.path.dirname(location_file)
     save_folder = os.path.join(save_folder, "Output")
@@ -93,6 +94,7 @@ def process():
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
         for idx, row in df.iterrows():
+            f_name = row[3].capitalize()
             base_url = row[1]  # Column B
             dob_name = row[3].replace("-", "")
             dob_date = row[5]
@@ -105,6 +107,9 @@ def process():
                 '7': 'Jul', '8': 'Aug', '9': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'
             }
             dob_month = month_names.get(dob_month, "Unknown")
+
+            combined_yes = []
+            combined_no = []
 
             for year in years:
                 try:
@@ -161,29 +166,52 @@ def process():
                                 dob_location
                             ])
                             
-                    # Save to CSV
-                    csv_path = os.path.join(save_folder, f"{dob_name}_HomeRun_{year}_YES.csv")
-                    df_output = pd.DataFrame(HomeRun_YES, columns=[
-                        "Day", "Month", "Year", "Location",
-                        "", "", "",
-                        "DOB Day", "DOB Month", "DOB Year",
-                        "Birth Location"
-                    ])
-                    df_output.to_csv(csv_path, index=False)
+                    if output_method_mode == "yearly":
+                        csv_path_yes = os.path.join(save_folder, f"{f_name}_HomeRun_{year}_YES.csv")
+                        df_output_yes = pd.DataFrame(HomeRun_YES, columns=[
+                            "Day", "Month", "Year", "Location",
+                            "", "", "",
+                            "DOB Day", "DOB Month", "DOB Year",
+                            "Birth Location"
+                        ])
+                        df_output_yes.to_csv(csv_path_yes, index=False)
 
-                    csv_path = os.path.join(save_folder, f"{dob_name}_HomeRun_{year}_NO.csv")
-                    df_output = pd.DataFrame(HomeRun_NO, columns=[
-                        "Day", "Month", "Year", "Location",
-                        "", "", "",
-                        "DOB Day", "DOB Month", "DOB Year",
-                        "Birth Location"
-                    ])
-                    df_output.to_csv(csv_path, index=False)
+                        csv_path_no = os.path.join(save_folder, f"{f_name}_HomeRun_{year}_NO.csv")
+                        df_output_no = pd.DataFrame(HomeRun_NO, columns=[
+                            "Day", "Month", "Year", "Location",
+                            "", "", "",
+                            "DOB Day", "DOB Month", "DOB Year",
+                            "Birth Location"
+                        ])
+                        df_output_no.to_csv(csv_path_no, index=False)
+                    else:
+                        combined_yes.extend(HomeRun_YES)
+                        combined_no.extend(HomeRun_NO)
 
                     print(f"✔ Data written for {url_with_year}")
                 except Exception as e:
                     print(f"✘ No table for {url_with_year}")
 
+            if output_method_mode == "combined":
+                if combined_yes:
+                    csv_path_yes = os.path.join(save_folder, f"{f_name}_HomeRun_ALL_YES.csv")
+                    df_output_yes = pd.DataFrame(combined_yes, columns=[
+                        "Day", "Month", "Year", "Location",
+                        "", "", "",
+                        "DOB Day", "DOB Month", "DOB Year",
+                        "Birth Location"
+                    ])
+                    df_output_yes.to_csv(csv_path_yes, index=False)
+
+                if combined_no:
+                    csv_path_no = os.path.join(save_folder, f"{f_name}_HomeRun_ALL_NO.csv")
+                    df_output_no = pd.DataFrame(combined_no, columns=[
+                        "Day", "Month", "Year", "Location",
+                        "", "", "",
+                        "DOB Day", "DOB Month", "DOB Year",
+                        "Birth Location"
+                    ])
+                    df_output_no.to_csv(csv_path_no, index=False)
         driver.quit()
 
         result_label.config(text=f"Completed! Results saved in temporary file:\n{save_folder}")
@@ -193,7 +221,7 @@ def process():
 # GUI Configuration
 root = tk.Tk()
 root.title("Yearly Table Scraper")
-root.geometry("520x320")
+root.geometry("520x400")
 
 tk.Label(root, text="Player_DOB_Location.csv file:").pack()
 file1_entry = tk.Entry(root, width=60)
@@ -208,6 +236,12 @@ tk.Button(root, text="Browse", command=lambda: browse_file(file2_entry, [("Text 
 tk.Label(root, text="How many years back to fetch data? (e.g., 3)").pack()
 year_entry = tk.Entry(root)
 year_entry.pack(pady=5)
+
+output_mode = tk.StringVar(value="yearly")
+
+tk.Label(root, text="Output mode:").pack()
+tk.Radiobutton(root, text="Save per year", variable=output_mode, value="yearly").pack()
+tk.Radiobutton(root, text="Save combined", variable=output_mode, value="combined").pack(pady=(0, 10))
 
 tk.Button(root, text="Start Scraping", command=process).pack(pady=10)
 
