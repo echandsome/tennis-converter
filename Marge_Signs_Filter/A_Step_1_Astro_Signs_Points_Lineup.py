@@ -32,20 +32,26 @@ def process_csv_to_excel(csv_file, excel_file, reference_excel):
     ws.append(["Partner A", "", "Partner B", ""] + [""] * 7 + ["Signs", "Symbol"])
     
     ref_col_indices = [53, 64, 54, 69, 62, 73, 74, 75, 65, 67, 68]
-    
-    ref_row_num = 2
+    temp_data = []
     
     for _, row in df.iterrows():
         if pd.notna(row[0]) and pd.notna(row[2]):
             dob_converted = convert_date(row[2]) if pd.notna(row[2]) else None
             ws.append([row[0], row[1], row[2], row[3]] + [""] * 7)
             if dob_converted:
-                if ref_row_num <= ref_ws.max_row:
-                    extracted_data = [
-                        ref_ws.cell(row=ref_row_num, column=col).value for col in ref_col_indices
-                    ]
-                    ws.append(extracted_data)
-                    ref_row_num += 1
+                for ref_row in ref_ws.iter_rows(min_row=2, max_row=ref_ws.max_row, min_col=64, max_col=64):
+                    if str(ref_row[0].value).strip() == dob_converted:
+                        extracted_data = [ref_ws.cell(row=ref_row[0].row, column=col).value for col in ref_col_indices]
+                        isExist = True
+                        for value in temp_data:
+                            if value == extracted_data[0]:
+                                isExist = False
+                                break
+                        if (isExist):
+                            ws.append(extracted_data)
+                            temp_data.append(extracted_data[0])
+                            break
+                        
         elif pd.notna(row[4]):
             ws.append([""] * 11 + [row[4], row[5]])
     

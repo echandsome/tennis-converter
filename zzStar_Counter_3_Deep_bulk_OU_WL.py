@@ -10,25 +10,39 @@ def analyze_excel_data(input_file, output_file, group_by_choice):
         df = pd.read_excel(input_file)
         columns = df.columns
 
-        # Column index assumption: L(13), Q(16), J(9), M(12)
-        group_columns = [columns[13], columns[16]]  # Default L, Q
+        group_columns = []
 
-        if group_by_choice == "LQJ":
-            group_columns.append(columns[9])  # J
-        elif group_by_choice == "LQM":
-            group_columns.append(columns[12])  # M
-        elif group_by_choice == "LQJM":
-            group_columns.extend([columns[9], columns[12]])  # J, M
+        if group_by_choice == 'AL' or group_by_choice == 'AN':
+            group_columns = [columns[0], columns[11]]
+            if group_by_choice == 'AN':
+                group_columns = [columns[0], columns[13]]
+        else:
+            # Column index assumption: L(13), Q(16), J(9), M(12)
+            group_columns = [columns[13], columns[16]]  # Default L, Q
+
+            if group_by_choice == "LQJ":
+                group_columns.append(columns[9])  # J
+            elif group_by_choice == "LQM":
+                group_columns.append(columns[12])  # M
+            elif group_by_choice == "LQJM":
+                group_columns.extend([columns[9], columns[12]])  # J, M
 
         grouped = df.groupby(group_columns)
 
         results = []
         for keys, group in grouped:
             key_values = keys if isinstance(keys, tuple) else (keys,)
-            if group_by_choice == "LQM":
-                result = dict(zip(['Symbol', 'Phase', 'M', 'M'][:len(key_values)], key_values))
-            else :
-                result = dict(zip(['Symbol', 'Phase', 'J', 'M'][:len(key_values)], key_values))
+
+            if group_by_choice == 'AL' or group_by_choice == 'AN':
+                if group_by_choice == "AL":
+                    result = dict(zip(['Player', 'Signs'][:len(key_values)], key_values))
+                else :
+                    result = dict(zip(['Player', 'Signs-Symbol'][:len(key_values)], key_values))
+            else:
+                if group_by_choice == "LQM":
+                    result = dict(zip(['Symbol', 'Phase', 'M', 'M'][:len(key_values)], key_values))
+                else :
+                    result = dict(zip(['Symbol', 'Phase', 'J', 'M'][:len(key_values)], key_values))
 
             over_count = sum(group[columns[7]].str.lower() == 'over')
             under_count = sum(group[columns[7]].str.lower() == 'under')
