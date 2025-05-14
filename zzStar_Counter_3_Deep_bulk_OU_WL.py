@@ -16,6 +16,10 @@ def analyze_excel_data(input_file, output_file, group_by_choice):
             group_columns = [columns[0], columns[11]]
             if group_by_choice == 'AN':
                 group_columns = [columns[0], columns[13]]
+        elif group_by_choice == 'AJN' or group_by_choice == 'AJNQ':
+            group_columns = [columns[0], columns[9], columns[13]]
+            if group_by_choice == 'AJNQ':
+                group_columns = [columns[0], columns[9], columns[13], columns[16]]
         else:
             # Column index assumption: L(13), Q(16), J(9), M(12)
             group_columns = [columns[13], columns[16]]  # Default L, Q
@@ -38,6 +42,11 @@ def analyze_excel_data(input_file, output_file, group_by_choice):
                     result = dict(zip(['Player', 'Signs'][:len(key_values)], key_values))
                 else :
                     result = dict(zip(['Player', 'Signs-Symbol'][:len(key_values)], key_values))
+            elif group_by_choice == 'AJN' or group_by_choice == 'AJNQ':
+                if group_by_choice == "AJN":
+                    result = dict(zip(['Player', 'J', 'Signs-Symbol'][:len(key_values)], key_values))
+                else :
+                    result = dict(zip(['Player', 'J', 'Signs-Symbol', 'Phase'][:len(key_values)], key_values))
             else:
                 if group_by_choice == "LQM":
                     result = dict(zip(['Symbol', 'Phase', 'M', 'M'][:len(key_values)], key_values))
@@ -68,7 +77,7 @@ class BulkExcelAnalysisApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Bulk Excel Data Analysis")
-        self.root.geometry("700x500")
+        self.root.geometry("750x500")
 
         self.group_by_choice = tk.StringVar(value="AL")
 
@@ -93,6 +102,8 @@ class BulkExcelAnalysisApp:
 
         ttk.Radiobutton(group_frame, text="A & L", variable=self.group_by_choice, value="AL").pack(side=tk.LEFT, padx=10)
         ttk.Radiobutton(group_frame, text="A & N", variable=self.group_by_choice, value="AN").pack(side=tk.LEFT, padx=10)
+        ttk.Radiobutton(group_frame, text="A, J & N", variable=self.group_by_choice, value="AJN").pack(side=tk.LEFT, padx=10)
+        ttk.Radiobutton(group_frame, text="A, J, N & Q", variable=self.group_by_choice, value="AJNQ").pack(side=tk.LEFT, padx=10)
         ttk.Radiobutton(group_frame, text="L & Q", variable=self.group_by_choice, value="LQ").pack(side=tk.LEFT, padx=10)
         ttk.Radiobutton(group_frame, text="L, Q & J", variable=self.group_by_choice, value="LQJ").pack(side=tk.LEFT, padx=10)
         ttk.Radiobutton(group_frame, text="L, Q & M", variable=self.group_by_choice, value="LQM").pack(side=tk.LEFT, padx=10)
